@@ -1,0 +1,24 @@
+html{
+    height: 100%;
+}
+
+
+body{
+	background-image: url("Media/BackgroundLogo.svg");
+    background-color: #000000 !important;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+	  
+.navbar-brand-text{
+
+    color: white;
+    font-family: "Rock Salt Regular", Times, serif !important;
+    font-size: 28px;
+}
+
+.nav-link_dropdown-toggle{
+    color: white;
+    font-family: "Rock Salt Regular", Times, serif !important;
+}
