@@ -1,24 +1,110 @@
-html{
-    height: 100%;
+@charset 'UTF-8';
+
+html,
+html * {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: arial, sans-serif;
+	font-size: 1vw;
+	background: white;
+}
+
+header {
+	position: fixed;
+	padding: 0em;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 3.5em;
+	background:rgba(1,0,0,.1);
 }
 
 
-body{
+nav{
+	display: flex;
+	height: 3.5em;
+}
+
+.logonav{
+	height: 3.5em;
+	float: left;
+}
+
+#navcontent {
+	display: flex;
+	justify-content: flex-end;
+	flex-flow: row wrap;
+	height: 3.5em;
+  }
+  
+  .navbox {
+	flex-basis: auto;
+	justify-content: center;
+	font-family: "Rock Salt Regular", Times, serif;
+	font-size: 1.25em;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
+	align-self: center;
+	color: #ffffff;
+	border-left: 1em solid transparent;
+	border-right: 1em solid transparent;
+  }
+
+.hero {
+	position: relative;
+	height: 54vw;
+	background-color: #000000;
 	background-image: url("Media/BackgroundLogo.svg");
-    background-color: #000000 !important;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: center;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%
 }
-	  
-.navbar-brand-text{
+.intro {
+	position: relative;
+	color: #343144;
+	background-image: linear-gradient(to bottom, rgb(0,0,0) 0%, rgb(41, 71, 119) 100%);
+	height: 50vw;
+	padding: 9em 6em 5em;
+}
 
-    color: white;
-    font-family: "Rock Salt Regular", Times, serif !important;
-    font-size: 28px;
+.artworks {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
 }
 
-.nav-link_dropdown-toggle{
-    color: white;
-    font-family: "Rock Salt Regular", Times, serif !important;
+.artwork {
+	display: flex;
 }
+
+.artwork .artwork-piece {
+padding: 8% 0 8% 23.5%;
+background-image: linear-gradient(to bottom, rgb(41, 71, 119) 0%, rgb(83,200,234) 100%);
+width: 50%;
+}
+.artwork figure {
+	position: relative;
+	vertical-align: middle;
+	padding: 50% 10%;
+	background: #cef0f2;
+}
+.artwork .artwork-description {
+	background-image: linear-gradient(to bottom, rgb(41, 71, 119) 0%, rgb(83,200,234) 100%);
+	width: 50%;
+	padding: 11.25em 10em 11.5em;
+}
+
+/* End Main Content */
+
+footer {
+	margin-top: -3em;
+	padding: 8.75em 0 2em;
+	height: 10vw;
+	background-color:rgb(83,200,234);
+}0
