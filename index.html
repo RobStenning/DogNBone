@@ -11,6 +11,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 	
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+<link href="https://fonts.googleapis.com/css?family=Rock+Salt&display=swap" rel="stylesheet">
 
 </head>
 
@@ -35,16 +37,16 @@
                     </div>
             <div id="navcontent">
 				
-				<a href="#" class="navbox">				
+				<a href="#brewerylink" class="navbox">			
                 	<div>Brewery</div>
                 </a>
-				<a href="#" class="navbox">
+				<a href="#ontaplink" class="navbox">
 					<div>On Tap</div>
                 </a>
-				<a href="#" class="navbox">
+				<a href="#storylink" class="navbox">
 					<div>Story</div>
 				</a>
-				<a href="#" class="navbox">
+				<a href="#latestlink" class="navbox">
                 	<div>Latest</div>
 				</a>
               </div>
@@ -53,13 +55,11 @@
 
     <!-- Main Content -->
     <main>
-        <section class="hero">
-        </section>
-        
-        <section class="intro">
-        </section>
+        <section class="hero"></section>
+		
+        <section id="brewerylink" class="intro"></section>
 
-        <section class="artworks">
+        <section id="ontaplink" class="artworks">
             <article class="artwork">
                 <div class="artwork-piece">
                     <figure>
@@ -69,21 +69,29 @@
                 </div>
             </article>
         </section>
+
+		<section id="storylink" class="story"></section>
+
+		<section id="latestlink" class="latest"></section>
+
+		
     </main>
     <!-- End Main Content -->
 
     <!-- Footer -->
     <footer id="footercontent">
 		<div class="footerbox">
-			<a href="#">Dog & Bone</a>
-			<i class="fa fa-facebook-square" style="font-size:36px"></i>
-			<i class="fa fa-instagram" style="font-size:36px"></i>
-			<i class="fa fa-envelope-o" style="font-size:36px"></i>
+			<a class="icons" href="#">
+				<i class="fa fa-facebook-square" style="font-size:36px"></i>
+			</a>
+			<a class="icons" href="#">
+				<i class="fa fa-instagram" style="font-size:36px"></i>
+			</a>
+			<a class="icons" href="#">
+				<i class="fa fa-envelope-o" style="font-size:36px"></i>
+			</a>
+          	<img src="Media/LogoIconWhite.svg" alt="" class="footerlogo">
 		</div>
-		
-    </footer>
-    
-	
-	
+	</footer>
 </body>
 </html>
