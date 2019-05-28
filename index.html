@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Dog & Bone Beer Co</title>
+	<title>DOG & BONE BEER Co</title>
 <link rel="stylesheet" type="text/css" href="Dog&Bone.css">	
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -20,60 +20,58 @@
 
 <body>
 
-	    
-    <!-- Header -->
+	<!-- Header -->
     <header>
-    <!-- Navigation Menu -->
+    
+		<!-- Navigation Menu -->
         <nav class="flex-container">
-                <div>
-                        <img src="Media/LogoIcon.svg" alt="" class="logonav">
-                        <img src="Media/LogoText.svg" alt="" class="logonav">
-                    </div>
-            <div id="navcontent">
-				
-				<a href="#brewerylink" class="navbox">			
-                	<div>Brewery</div>
-                </a>
+			<div>
+					<a href="#homelink">
+						<img src="Media/LogoIconWhite.svg" alt="" class="logonav">
+						<img src="Media/LogoTextWhite.svg" alt="" class="logotextnav">
+					</a>
+			</div>
+			<div id="navcontent">
+				<a href="#brewerylink" class="navbox">
+					<div>Brewery</div>
+				</a>
 				<a href="#ontaplink" class="navbox">
 					<div>On Tap</div>
-                </a>
+				</a>
 				<a href="#storylink" class="navbox">
 					<div>Story</div>
 				</a>
 				<a href="#latestlink" class="navbox">
-                	<div>Latest</div>
+					<div>Latest</div>
 				</a>
-              </div>
+			</div>
 		</nav>
-    </header>
+	</header>
 
     <!-- Main Content -->
     <main>
-        <section class="hero"></section>
+        <section id="homelink" class="hero"></section>
 		
-        <section id="brewerylink" class="intro"></section>
-
-        <section id="ontaplink" class="artworks">
-            <article class="artwork">
-                <div class="artwork-piece">
-                    <figure>
-                    </figure>
-                </div>
-                <div class="artwork-description">
-                </div>
-            </article>
-        </section>
-
-		<section id="storylink" class="story"></section>
-
-		<section id="latestlink" class="latest"></section>
-
-		
-    </main>
-    <!-- End Main Content -->
-
-    <!-- Footer -->
-    <footer id="footercontent">
+		<div class="allcontent">
+        	<section id="brewerylink" class="intro"></section>
+			<section id="ontaplink" class="artworks">
+				<article class="artwork">
+                	<div class="artwork-piece">
+                    	<figure>
+                    	</figure>
+                	</div>
+                	<div class="artwork-description">
+					</div>
+				</article>
+			</section>
+			<section id="storylink" class="story"></section>
+			<section id="latestlink" class="latest"></section>
+		</div>
+	</main>
+	<!-- End Main Content -->
+	
+	<!-- Footer -->
+	<footer id="footercontent">
 		<div class="footerbox">
 			<a class="icons" href="#">
 				<i class="fa fa-facebook-square" style="font-size:36px"></i>
@@ -84,7 +82,7 @@
 			<a class="icons" href="#">
 				<i class="fa fa-envelope-o" style="font-size:36px"></i>
 			</a>
-          	<img src="Media/LogoIconWhite.svg" alt="" class="footerlogo">
+			<img src="Media/LogoIconWhite.svg" alt="" class="footerlogo">
 		</div>
 	</footer>
 </body>

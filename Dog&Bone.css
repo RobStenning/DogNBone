@@ -48,7 +48,7 @@ header {
 	left: 0;
 	width: 100%;
 	height: 3.5em;
-	background:rgba(1,0,0,.1);
+	background:rgba(1,0,0,.25);
 }
 
 
@@ -60,6 +60,12 @@ nav{
 .logonav{
 	height: 3.5em;
 	float: left;
+}
+
+.logotextnav{
+	height: 3.5em;
+	float: left;
+	padding-left: .5em;
 }
 
 #navcontent {
@@ -95,7 +101,6 @@ nav{
 .intro {
 	position: relative;
 	height: 54vw;
-	background-image: url("Media/PatternBlackBackground-01.svg");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 100%
@@ -114,7 +119,6 @@ nav{
 
 .artwork .artwork-piece {
 padding: 8% 0 8% 23.5%;
-background-image: linear-gradient(to bottom, rgb(255, 255, 255) 1%, rgb(70, 70, 70) 98%);
 width: 50%;
 
 }
@@ -126,23 +130,18 @@ width: 50%;
 	
 }
 .artwork .artwork-description {
-	background-image: linear-gradient(to bottom, rgb(255, 255, 255) 1%, rgb(70, 70, 70) 98%);
 	width: 50%;
 	padding: 11.25em 10em 11.5em;
 }
 
 
 .story {
-		position: relative;
+	position: relative;
 	height: 54vw;
-	background-image: ;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: 100%
-}
+	}
 
-.latest {
-	background-image: url("Media/");
+.allcontent {
+	background-image: url("Media/PatternBlackBackgroundTest.svg");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 100%
