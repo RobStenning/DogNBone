@@ -13,25 +13,36 @@ html * {
 		scroll-behavior: auto;
 	}
 }
+@media screen and (max-width: 700px) {
+	div.navcontent {
+		display: none;
+	}	
+}
+@media screen and (max-width: 1050px) {
+	.beerdescription {
+		display: none;
+	}	
+}
 
 /* unvisited link */
 a:link {
-  color: white;
+	color: white;
+	text-decoration: none;
 }
 
 /* visited link */
 a:visited {
-  color: ;
+  color: white;
 }
 
 /* mouse over link */
 a:hover {
-  color: grey !important;
+  color: grey;
 }
 
 /* selected link */
 a:active {
-  color: green;
+  color: grey;
 }
 
 body {
@@ -47,47 +58,41 @@ header {
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 3.5em;
+	height: 35px;
 	background:rgba(1,0,0,.25);
 }
 
-
-nav{
+nav {
 	display: flex;
-	height: 3.5em;
+	height: 35px;
+	
 }
 
-.logonav{
-	height: 3.5em;
+.logonav {
+	height: 35px;
 	float: left;
 }
 
-.logotextnav{
-	height: 3.5em;
+.logotextnav {
+	height: 35px;
 	float: left;
 	padding-left: .5em;
 }
-
-#navcontent {
-	display: flex;
-	justify-content: flex-end;
-	flex-flow: row wrap;
-	height: 3.5em;
-  }
-  
-  .navbox {
+ 
+.navbox {
 	flex-basis: auto;
-	justify-content: center;
+	justify-content: top;
 	font-family: 'Rock Salt', cursive;
-	font-size: 1.25em;
-	align-items: center;
+	font-size: 20px;
+	align-items: top;
 	flex-direction: column;
-	text-align: center;
-	align-self: center;
+	text-align: top;
+	align-self: top;
 	color: #ffffff;
 	border-left: 1em solid transparent;
 	border-right: 1em solid transparent;
-  }
+	display: inline-flex;
+}
 
 .hero {
 	position: relative;
@@ -98,60 +103,81 @@ nav{
 	background-position: center;
 	background-size: 100%
 }
-.intro {
+
+.brewery {
 	position: relative;
-	height: 54vw;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: 100%
-	
-}
-
-.artworks {
-	position: relative;
-	width: 100%;
-	overflow: hidden;
-}
-
-.artwork {
+	background-size: 100%;
 	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding-top: 35px;	
+	max-height: 350px;
 }
 
-.artwork .artwork-piece {
-padding: 8% 0 8% 23.5%;
-width: 50%;
-
+p {
+	font-size: 1rem;
+	font-family: 'Raleway', sans-serif;
 }
-.artwork figure {
-	position: relative;
-	vertical-align: middle;
-	padding: 50% 10%;
-	background: #cef0f2;
+
+h1{
+	font-size: 1.25rem;
+	font-family: 'Rock Salt', cursive;
+}
+h2{
+	font-size: .9rem;
+	font-family: 'Rock Salt', cursive;
+}
+
+.imageblocks {
+	display: flex;
+	align-items: flex-start;
+	background: rgba(255,255,255,.25);
+	padding: 1rem;
+	height: 350px;
+	max-height: 350px;
 	
-}
-.artwork .artwork-description {
-	width: 50%;
-	padding: 11.25em 10em 11.5em;
-}
+  }
+  .imageblocks > img {
+	width: 30%;
+	margin: .3rem 1rem 0.5rem 0;
+	max-height: 200px;
 
+  }
+  .imageblocks > div {
+	flex: 1;
+  }
+  .imageblocks h1 {
+	font-weight: 500;
+	margin: 0 0 0.3rem 0;
+  }
 
 .story {
 	position: relative;
-	height: 54vw;
-	}
-
-.allcontent {
-	background-image: url("Media/PatternBlackBackgroundTest.svg");
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: 100%
+	padding-top: 3.5em;
+	height: 350px;
+	max-height: 350px;
 }
 
+.ontap {
+	position: relative;
+	padding-top: 3.5em;
+	height: 350px;
+}
 
+.latest {
+	position: relative;
+	padding-top: 3.5em;
+	height: 350px;
+}
 
-
-
-
+.allcontent {
+	background-image: linear-gradient(black, white)
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+}
 /* End Main Content */
 
 .footerbox {
