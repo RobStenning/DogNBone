@@ -133,7 +133,7 @@ h2{
 .imageblocks {
 	object-fit: cover;
 	display: flex;
-	background: rgba(255,255,255,.25);
+	background: rgba(0, 0, 0, 0.25);
 	padding: 1rem;
 	
 	
@@ -185,7 +185,7 @@ h2{
 .footerbox {
 	padding: 1em;
 	color: white;
-	background-color: #464646;
+	background-color: #000000;
 }
 
 .icons {
