@@ -46,20 +46,21 @@ a:active {
 }
 
 body {
-	font-family: arial, sans-serif;
+	font-family: 'raleway', sans-serif;
 	font-size: 1vw;
-	background: white;
+	color: rgb(255, 255, 255);
+	background: rgb(0, 0, 0);
 }
 
 header {
 	position: fixed;
-	padding: 0em;
+	padding: 15px;
 	z-index: 1000;
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 35px;
-	background:rgba(1,0,0,.25);
+	height: ;
+	background:rgba(1,0,0);
 }
 
 nav {
@@ -88,7 +89,7 @@ nav {
 	flex-direction: column;
 	text-align: top;
 	align-self: top;
-	color: #ffffff;
+	color: #000000;
 	border-left: 1em solid transparent;
 	border-right: 1em solid transparent;
 	display: inline-flex;
@@ -112,8 +113,7 @@ nav {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	padding-top: 35px;	
-	max-height: 350px;
+	padding-top: 3.5em;
 }
 
 p {
@@ -135,6 +135,8 @@ h2{
 	display: flex;
 	background: rgba(0, 0, 0, 0.25);
 	padding: 1rem;
+	padding-left: 175px;
+	padding-right: 175px;
 	
 	
   }
@@ -152,7 +154,6 @@ h2{
   }
 
 .story {
-	object: cover;
 	position: relative;
 	padding-top: 3.5em;
 	}
@@ -165,12 +166,10 @@ h2{
 .ontap {
 	position: relative;
 	padding-top: 3.5em;
-	height: 350px;
 }
 
 .latest {
 	position: relative;
-	padding-top: 3.5em;
 	height: 30rem;
 }
 
