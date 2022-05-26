@@ -182,7 +182,9 @@ h2{
 /* End Main Content */
 
 .footerbox {
-	padding: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;	padding: 1em;
 	color: white;
 	background-color: #000000;
 }
