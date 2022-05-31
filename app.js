@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/dog-and-bone');
-
+const Beer = require('./models/beers');
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -18,6 +18,16 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.get('/', (req, res) => {
     res.render('home')
+})
+
+app.get('/taplist', async (req, res) => {
+    const beers = await Beer.find({})
+    res.render('beers/index', { beers });
+})
+
+app.get('/beers/:id', async (req, res) => {
+    const beer = await Beer.findById(req.params.id)
+    res.render('beers/info', { beer })
 })
 
 app.listen(3000, () => {

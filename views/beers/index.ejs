@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tap List</title>
+</head>
+<body>
+    <h1>Tap List</h1>
+    <ul>
+        <% for (let beer of beers) {%> 
+            <li><%= beer.name %></li>
+            <a href="/beers/<%=beer._id%>"> more</a>
+            <% }%>
+    </ul>
+</body>
+</html>
