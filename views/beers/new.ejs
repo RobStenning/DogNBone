@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Beer</title>
+</head>
+<body>
+    <h1>new beer</h1>
+    <form action="/beers" method="POST">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="beer[name]">
+        </div>
+        <div>
+            <label for="abv">ABV</label>
+            <input type="text" id="abv" name="beer[abv]">
+        </div>
+        <div>
+            <label for="style">Style</label>
+            <input type="text" id="style" name="beer[style]">
+        </div>
+        <div>
+            <label for="ibu">IBU</label>
+            <input type="text" id="ibu" name="beer[ibu]">
+        </div>
+        <div>
+            <label for="dryHops">Dry Hops</label>
+            <input type="text" id="dryHops" name="beer[dryHops]">
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <textarea type="text" id="description" name="beer[description] "cols="30" rows="10">
+            </textarea>
+        </div>
+        <div>
+            <label for="ontap">Dry Hops</label>
+            <input type="text" id="ontap" name="beer[ontap]">
+        </div>
+
+        <button>Add New Beer</button>
+        <a href="/taplist">back</a>
+    </form>
+</body>
+</html>
