@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/dog-and-bone');
+const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 const Beer = require('./models/beers');
 const beers = require('./models/beers');
@@ -14,14 +15,15 @@ db.once("open", () => {
 
 const app = express();
 
-
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+app.use('/styles', express.static(__dirname + '/styles'))
 
-app.get('/', (req, res) => {
+app.get('/home', (req, res) => {
     res.render('home')
 })
 
