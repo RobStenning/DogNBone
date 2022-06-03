@@ -23,13 +23,13 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use('/styles', express.static(__dirname + '/styles'))
 
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
     res.render('home')
 })
 
 app.get('/taplist', async (req, res) => {
     const beers = await Beer.find({})
-    res.render('beers/index', { beers });
+    res.render('beers/taplist', { beers });
 })
 
 app.get('/new', (req, res) => {
