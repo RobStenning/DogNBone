@@ -23,13 +23,25 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use('/styles', express.static(__dirname + '/styles'))
 
-app.get('/', (req, res) => {
-    res.render('home')
+app.get('/', async (req, res) => {
+    const beers = await Beer.find({});
+    const displayOntap = await Beer.findOne({ ontap: 'pouring'});
+    res.render('home', { beers, displayOntap });
 })
 
 app.get('/taplist', async (req, res) => {
     const beers = await Beer.find({})
-    res.render('beers/taplist', { beers });
+    const displayOntap = await Beer.findOne({ ontap: 'pouring'});
+    const displayIncoming = await Beer.findOne({ ontap: 'kegged'});
+    const displayBottled = await Beer.findOne({ ontap: 'bottled'});
+    const displayPrevious = await Beer.findOne({ ontap: 'previous'});
+    res.render('beers/taplist', { beers, displayOntap, displayIncoming, displayBottled, displayPrevious });
+})
+
+app.get('/previousbeers', async (req, res) => {
+    const beers = await Beer.find({})
+    const displayPrevious = await Beer.findOne({ ontap: 'previous'});
+    res.render('beers/previousbeers', { beers, displayPrevious});
 })
 
 app.get('/new', (req, res) => {

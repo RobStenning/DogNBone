@@ -15,11 +15,17 @@
                 <p class="descriptiontext" ><%= beer.description%></p>
             </div>
         </div>
-        <div>
+        <br>
+        <div class="menuflex-container" >
+            <div class="flex-item">
             <a href="/beers/<%=beer._id %>/edit">Edit Beer</a>
-            <form action="/beers/<%=beer._id%>?_method=DELETE" method="POST" >
-            <button>Delete Beer</button></form>
-            <a href="/taplist">All Beers</a>
+            </div>
+            <form  class="flex-item" action="/beers/<%=beer._id%>?_method=DELETE" method="POST" >
+                <a>Delete Beer</a>
+            </form>
+            <div class="flex-item">
+                <a class="flex-item" href="/taplist">All Beers</a>
+            </div>
         </div>
     </div>
 </main>

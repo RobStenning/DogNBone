@@ -7,6 +7,7 @@ const BeerSchema = new Schema({
     style: String,
     ibu: Number,
     dryHops: Number,
+    previewDescription: String,
     description: String,
     ontap: String
 });

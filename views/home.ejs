@@ -2,9 +2,8 @@
 <main>
     <section id="homelink" class="hero">
     </section>
-    
     <div class="allcontent">
-           <section id="brewerylink" class="brewery">	
+        <section id="brewerylink" class="brewery">	
             <div class="imageblocks">
                 <img class="squareimage" src="https://live.staticflickr.com/65535/51039511708_250bc8de7a_o.jpg" alt="">
                 <div>
@@ -20,28 +19,25 @@
                 </div>
             </div>
         </section>
-        
+
         <section id="ontaplink" class="ontap">
         <div class="imageblocks">
                 <img class="squareimage" src="https://live.staticflickr.com/65535/51040316371_d43d7f8626_o.jpg" alt="">
             <div>
                 <h1>Pouring Now</h1>
-                <h2>- PAW - 4.2% - Pale Ale -</h2>
-                <p class="beerdescription">Our go to Pale Ale, refreshing and easy drinking like a British Pale but with enough hops to confuse it with a American. A crowd pleaser just like the trick.</p>
-                <h2>- Pilsner Pilsner - 4.3% - Pilsner -</h2>
-                <p class="beerdescription">Sorry officer but I don't go anywhere without my Pilsner Pilsner! A traditional style Pilsner using German noble hops along wth a dash of American hops, this crispy boi will quench your thirst in the summer sun, ok rain lets be honesat it is the UK after all.</p>
-                <h2>- Pineapple Sour - 3.8% - Sour -</h2>
-                <p class="beerdescription">Brewed with a yeast strain that produces acid along side alcohol, this batch had eight cans of pineapple blended in to add depth and sweetness.</p>
-                <h2>- Ol' Red - 5.2% - Red IPA -</h2>
-                <p class="beerdescription">A Red IPA, simple easy drinking, a bit like a bitter but way better than Doombar. Please drink it, I want to put on a way more exciting beer as soon as this is finished.</p>
+                <% for (let beer of beers) {%>
+                    <% if (beer.ontap === 'pouring') { %>
+                        <h2>- <%= beer.name %> - <%= beer.abv %> - <%= beer.style %> -</h2>
+                        <p class="beerdescription"><%= beer.previewDescription %></p>
+                   <% } %>
+                <%} %>
                 <br>
                 <a class="" href="/taplist">
                     <h2>More</h2>
                 </a>
             </div>
             </div>	
-        </section>
-        
+        </section>        
         <section id="storylink" class="story">
             <div class="imageblocks">
                 <img class="squareimage" src="https://live.staticflickr.com/65535/51040411132_c4a5dc20bd_o.jpg">
@@ -55,7 +51,6 @@
                 </div>
             </div>
         </section>
-        
         <section id="latestlink" class="latest">
             <div class="imageblocks">
                 <img class="squareimage" src="https://images.unsplash.com/photo-1554127959-b04104f23bab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1901&q=80" alt="">

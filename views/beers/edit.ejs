@@ -1,32 +1,40 @@
 <% layout('../layouts/boilerplate')%>
-    <h1>edit beer</h1>
+<main>
+<div class="allcontent">
+    <h1 class="beertitle">edit beer</h1>
+    <div  class="menuflex-container">
     <form action="/beers/<%=beer._id%>?_method=PUT" method="POST">
-        <div>
+        <div class="flex-item">
             <label for="name">Name</label>
             <input type="text" id="name" name="beer[name]" value="<%=beer.name%>">
         </div>
-        <div>
+        <div class="flex-item">
             <label for="abv">ABV</label>
             <input type="text" id="abv" name="beer[abv]" value="<%=beer.abv%>">
         </div>
-        <div>
+        <div class="flex-item">
             <label for="style">Style</label>
             <input type="text" id="style" name="beer[style]" value="<%=beer.style%>">
         </div>
-        <div>
+        <div class="flex-item">
             <label for="ibu">IBU</label>
             <input type="text" id="ibu" name="beer[ibu]" value="<%=beer.ibu%>">
         </div>
-        <div>
+        <div class="flex-item">
             <label for="dryHops">Dry Hops</label>
             <input type="text" id="dryHops" name="beer[dryHops]" value="<%=beer.dryHops%>">
         </div>
-        <div>
+        <div class="flex-item">
+            <label for="previewDescription">Preview Description</label>
+            <textarea type="text" id="previewDescription" name="beer[previewDescription] "cols="30" rows="10">
+                <%=beer.previewDescription%></textarea>
+        </div>
+        <div class="flex-item">
             <label for="description">Description</label>
             <textarea type="text" id="description" name="beer[description] "cols="30" rows="10">
                 <%=beer.description%></textarea>
         </div>
-        <div>
+        <div class="flex-item">
             <label for="ontap">On Tap</label>
                 <select name="beer[ontap]" id="ontap">
                 <option value="pouring">Pouring</option>
@@ -36,6 +44,16 @@
             </select>
             <script defer>document.getElementById('ontap').value = "<%=beer.ontap%>";</script>
         </div>
-        <button>Edit Beer</button>
-        <a href="/beers/<%=beer._id%>">back</a>
-    </form>
+        <div class="flex-container" >        
+            <button class="flex-item" >Edit Beer</button>
+            <a class="flex-item" href="/beers/<%=beer._id%>">back</a>    
+        </div>
+        </form>
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+</main>
