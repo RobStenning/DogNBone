@@ -28,7 +28,13 @@
         </div>
         <div>
             <label for="ontap">On Tap</label>
-            <input type="text" id="ontap" name="beer[ontap]" value="<%=beer.ontap%>">
+                <select name="beer[ontap]" id="ontap">
+                <option value="pouring">Pouring</option>
+                <option value="kegged">Kegged</option>
+                <option value="previous">Previous</option>
+                <option value="bottled">Bottled</option>
+            </select>
+            <script defer>document.getElementById('ontap').value = "<%=beer.ontap%>";</script>
         </div>
         <button>Edit Beer</button>
         <a href="/beers/<%=beer._id%>">back</a>

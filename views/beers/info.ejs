@@ -1,16 +1,25 @@
 <% layout('../layouts/boilerplate')%>
-    <h1><%= beer.name %></h1>
-    <ul>
-        <li><%= beer.abv%></li>
-        <li><%= beer.style%></li>
-        <li><%= beer.ibu%></li>
-        <li><%= beer.dryHops%></li>
-        <li><%= beer.description%></li>
-        <li><%= beer.ontap%></li>
-    </ul>
-    <div>
-        <a href="/beers/<%=beer._id %>/edit">Edit Beer</a>
-        <form action="/beers/<%=beer._id%>?_method=DELETE" method="POST" >
-        <button>Delete Beer</button></form>
-        <a href="/taplist">All Beers</a>
+<main>
+    <div class="allcontent" >
+        <p class="title" ><%= beer.name %></p>
+        <div class="imageblocks" >
+            <div>            
+                <ul class="menuflex-container" >
+                    <li class="flex-item" ><%= beer.abv%></li>
+                    <li class="flex-item" ><%= beer.style%></li>
+                    <li class="flex-item" ><%= beer.ibu%></li>
+                    <li class="flex-item" ><%= beer.dryHops%></li>
+                    <li class="flex-item" ><%= beer.ontap%></li>
+                </ul>
+                <br>
+                <p class="descriptiontext" ><%= beer.description%></p>
+            </div>
+        </div>
+        <div>
+            <a href="/beers/<%=beer._id %>/edit">Edit Beer</a>
+            <form action="/beers/<%=beer._id%>?_method=DELETE" method="POST" >
+            <button>Delete Beer</button></form>
+            <a href="/taplist">All Beers</a>
+        </div>
     </div>
+</main>

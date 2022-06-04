@@ -28,8 +28,13 @@
             </textarea>
         </div>
         <div>
-            <label for="ontap">Dry Hops</label>
-            <input type="text" id="ontap" name="beer[ontap]">
+            <label for="ontap">On Tap</label>
+            <select name="beer[ontap]" id="ontap">
+                <option value="pouring">Pouring</option>
+                <option value="kegged">Kegged</option>
+                <option value="previous">Previous</option>
+                <option value="bottled">Bottled</option>
+            </select>
         </div>
 
         <button>Add New Beer</button>
