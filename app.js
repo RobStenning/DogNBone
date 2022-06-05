@@ -76,6 +76,10 @@ app.delete('/beers/:id', async (req, res) => {
     res.redirect('/taplist')
 })
 
+app.get('/login', (req, res) =>{
+    res.render('login');
+})
+
 app.listen(3000, () => {
     console.log('serving on port 3000')
 })

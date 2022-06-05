@@ -53,6 +53,15 @@ a:active {
 	color: green;
 }
 
+.loginButton {
+    font-size: 1.25rem;
+    text-align: center;
+    font-family: 'Rock Salt', cursive;
+	width: 100%;
+	margin-top: 20px;
+	align-items: center;
+}
+
 body {
 	font-family: 'raleway', sans-serif;
 	font-size: 1vw;
@@ -150,7 +159,7 @@ h2{
     font-size: 1.25rem;
     text-align: center;
     font-family: 'Rock Salt', cursive;
-  }
+}
 
 .edit-page {
 	justify-content: center;
