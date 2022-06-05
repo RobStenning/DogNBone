@@ -1,43 +1,59 @@
 <% layout('../layouts/boilerplate')%>
-<body>
-    <h1>new beer</h1>
-    <form action="/beers" method="POST">
+<main>
+    <br>
+    <br>
+    <br>
+    <div class="allcontent" >
+        <h1 class="beertitle" >new beer</h1>
         <div>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="beer[name]">
+            <form action="/beers" method="POST">
+                <div class="edit-container">
+                    <label class="edit-flex-item" for="name">Name</label>
+                    <input class="edit-flex-item" type="text" id="name" name="beer[name]" required>
+                </div>
+                <div class="edit-container">
+                    <label class="edit-flex-item" for="abv">ABV</label>
+                    <input class="edit-flex-item" type="text" id="abv" name="beer[abv]" required>
+                </div>
+                <div class="edit-container">
+                    <label class="edit-flex-item" for="style">Style</label>
+                    <input class="edit-flex-item" type="text" id="style" name="beer[style]" required>
+                </div>
+                <div class="edit-container">
+                    <label class="edit-flex-item" for="ibu">IBU</label>
+                    <input class="edit-flex-item" type="text" id="ibu" name="beer[ibu]" required>
+                </div>
+                <div class="edit-container">
+                    <label class="edit-flex-item" for="dryHops">Dry Hops</label>
+                    <input class="edit-flex-item" type="text" id="dryHops" name="beer[dryHops]" required>
+                </div>
+                <div class="edit-container">
+                    <label class="edit-flex-item" for="previewDescription">Preview Description</label>
+                    <textarea class="edit-flex-item" type="text" id="previewDescription" name="beer[previewDescription] "cols="30" rows="10" required></textarea>
+                </div>
+                <div class="edit-container">
+                    <label class="edit-flex-item" for="description">Description</label>
+                    <textarea class="edit-flex-item" type="text" id="description" name="beer[description] "cols="30" rows="10" required></textarea>
+                </div>
+                <div class="edit-container">
+                    <label for="ontap">On Tap</label>
+                    <select name="beer[ontap]" id="ontap">
+                        <option value="pouring">Pouring</option>
+                        <option value="kegged">Kegged</option>
+                     <option value="previous">Previous</option>
+                        <option value="bottled">Bottled</option>
+                    </select>
+                </div>
+                <div class="edit-container-button" >
+                    <button id="editButton" class="edit-flex-item">Add New Beer</button>
+                    <a class="edit-flex-item" href="/taplist">back</a>
+                </div>
+            </form>
         </div>
-        <div>
-            <label for="abv">ABV</label>
-            <input type="text" id="abv" name="beer[abv]">
-        </div>
-        <div>
-            <label for="style">Style</label>
-            <input type="text" id="style" name="beer[style]">
-        </div>
-        <div>
-            <label for="ibu">IBU</label>
-            <input type="text" id="ibu" name="beer[ibu]">
-        </div>
-        <div>
-            <label for="dryHops">Dry Hops</label>
-            <input type="text" id="dryHops" name="beer[dryHops]">
-        </div>
-        <div>
-            <label for="description">Description</label>
-            <textarea type="text" id="description" name="beer[description] "cols="30" rows="10">
-            </textarea>
-        </div>
-        <div>
-            <label for="ontap">On Tap</label>
-            <select name="beer[ontap]" id="ontap">
-                <option value="pouring">Pouring</option>
-                <option value="kegged">Kegged</option>
-                <option value="previous">Previous</option>
-                <option value="bottled">Bottled</option>
-            </select>
-        </div>
-
-        <button>Add New Beer</button>
-        <a href="/taplist">back</a>
-    </form>
-</body>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</main>
