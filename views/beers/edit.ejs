@@ -2,39 +2,38 @@
 <main>
 <div class="allcontent">
     <h1 class="beertitle">edit beer</h1>
-    <div  class="menuflex-container">
+    <div  class="edit-page">
     <form action="/beers/<%=beer._id%>?_method=PUT" method="POST">
-        <div class="flex-item">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="beer[name]" value="<%=beer.name%>">
+        <div class="edit-container">
+            <label class="edit-flex-item" for="name">Name</label>
+            <input class="edit-flex-item" type="text" id="name" name="beer[name]" value="<%=beer.name%>">
+            
         </div>
-        <div class="flex-item">
-            <label for="abv">ABV</label>
-            <input type="text" id="abv" name="beer[abv]" value="<%=beer.abv%>">
+        <div class="edit-container">
+            <label class="edit-flex-item" for="abv">ABV</label>
+            <input class="edit-flex-item" type="text" id="abv" name="beer[abv]" value="<%=beer.abv%>">
         </div>
-        <div class="flex-item">
-            <label for="style">Style</label>
-            <input type="text" id="style" name="beer[style]" value="<%=beer.style%>">
+        <div class="edit-container">
+            <label class="edit-flex-item" for="style">Style</label>
+            <input class="edit-flex-item" type="text" id="style" name="beer[style]" value="<%=beer.style%>">
         </div>
-        <div class="flex-item">
-            <label for="ibu">IBU</label>
-            <input type="text" id="ibu" name="beer[ibu]" value="<%=beer.ibu%>">
+        <div class="edit-container">
+            <label class="edit-flex-item" for="ibu">IBU</label>
+            <input class="edit-flex-item" type="text" id="ibu" name="beer[ibu]" value="<%=beer.ibu%>">
         </div>
-        <div class="flex-item">
-            <label for="dryHops">Dry Hops</label>
-            <input type="text" id="dryHops" name="beer[dryHops]" value="<%=beer.dryHops%>">
+        <div class="edit-container">
+            <label class="edit-flex-item" for="dryHops">Dry Hops</label>
+            <input class="edit-flex-item" type="text" id="dryHops" name="beer[dryHops]" value="<%=beer.dryHops%>">
         </div>
-        <div class="flex-item">
-            <label for="previewDescription">Preview Description</label>
-            <textarea type="text" id="previewDescription" name="beer[previewDescription] "cols="30" rows="10">
-                <%=beer.previewDescription%></textarea>
+        <div class="edit-container">
+            <label  class="edit-flex-item"for="previewDescription">Preview Description</label>
+            <textarea class="edit-flex-item" type="text" id="previewDescription" name="beer[previewDescription] "cols="30" rows="10"><%=beer.previewDescription%></textarea>
         </div>
-        <div class="flex-item">
-            <label for="description">Description</label>
-            <textarea type="text" id="description" name="beer[description] "cols="30" rows="10">
-                <%=beer.description%></textarea>
+        <div class="edit-container">
+            <label class="edit-flex-item" for="description">Description</label>
+            <textarea class="edit-flex-item" type="text" id="description" name="beer[description] "cols="30" rows="10"><%=beer.description%></textarea>
         </div>
-        <div class="flex-item">
+        <div class="edit-container">
             <label for="ontap">On Tap</label>
                 <select name="beer[ontap]" id="ontap">
                 <option value="pouring">Pouring</option>
@@ -44,12 +43,12 @@
             </select>
             <script defer>document.getElementById('ontap').value = "<%=beer.ontap%>";</script>
         </div>
-        <div class="flex-container" >        
-            <button class="flex-item" >Edit Beer</button>
-            <a class="flex-item" href="/beers/<%=beer._id%>">back</a>    
+        <div class="edit-container-button" >        
+            <button id="editButton" class="edit-flex-item">Edit Beer</button>
+            <a class="edit-flex-item" href="/beers/<%=beer._id%>">back</a>    
         </div>
         </form>
-</div>
+    </div>
 </div>
 <br>
 <br>

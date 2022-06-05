@@ -45,6 +45,14 @@ a:active {
   color: grey;
 }
 
+#deleteButton:hover {
+	color: red;
+}
+
+#editButton:hover {
+	color: green;
+}
+
 body {
 	font-family: 'raleway', sans-serif;
 	font-size: 1vw;
@@ -130,39 +138,53 @@ h2{
 	font-family: 'Rock Salt', cursive;
 }
 .menuflex-container {
-    /* We first create a flex layout context */
     display: flex;
-    
-    /* Then we define the flow direction 
-       and if we allow the items to wrap 
-     * Remember this is the same as:
-     * flex-direction: row;
-     * flex-wrap: wrap;
-     */
     flex-flow: row wrap;
-    
-    /* Then we define how is distributed the remaining space */
     justify-content: space-around;
-    
     padding: 0;
     margin: 0;
     list-style: none;
   }
   
-  .flex-item {
-    -background: tomato;
-    -padding: 5px;
-    -width: 200px;
-    -height: 150px;
-    -margin-top: 10px;
-    -line-height: 150px;
-    -color: white;
-    -font-weight: bold;
+.flex-item {
     font-size: 1.25rem;
     text-align: center;
     font-family: 'Rock Salt', cursive;
   }
 
+.edit-page {
+	justify-content: center;
+}
+
+.edit-container {
+	display: flex;
+    flex-flow: row wrap;
+	justify-content: space-evenly;
+    padding: 0px 20% 0px 20%;
+    margin: 0;
+}
+
+.edit-flex-item {
+	width: 100%;
+    font-size: 1.25rem;
+    justify-content: flex-start;
+    font-family: 'Rock Salt', cursive;
+}
+
+.edit-flex-item input {
+	width: 100%;
+    font-size: 1.25rem;
+    justify-content: flex-start;
+    font-family: 'roboto', cursive;
+}
+
+.edit-container-button {
+	display: flex;
+    flex-flow: row ;
+	justify-content: space-evenly;
+    padding: 0px 20% 0px 20%;
+    margin: 0;
+}
 .title {
     text-align: center;
     font-family: 'Rock Salt', cursive;
