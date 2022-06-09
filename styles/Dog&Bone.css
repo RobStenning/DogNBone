@@ -272,6 +272,23 @@ h2{
 	background-position: center;
 	background-size: 100%;
 }
+
+.error {
+	padding-top: 100px;
+	margin-left: 100px;
+	margin-right: 100px;
+	display: flex;
+    flex-flow: row wrap;
+	justify-content: space-evenly;
+}
+
+.error-item {
+	width: 90%;
+	display: flex;
+ 	justify-content: space-evenly;
+    font-family: 'Rock Salt', cursive;	
+}
+
 /* End Main Content */
 
 .footerbox {
