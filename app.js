@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/dog-and-bone');
 const ejsMate = require('ejs-mate');
+const Joi = require('joi');
 const catchAsync = require('./tools/catchAsync');
 const ExpressError = require('./tools/ExpressError');
 const methodOverride = require('method-override');
@@ -51,7 +52,24 @@ app.get('/new', (req, res) => {
 })
 
 app.post('/beers', catchAsync(async (req, res, next) => { 
-    if(!req.body.campground) throw new ExpressError('Invalid Data', 400);
+    const beerSchema = Joi.object({
+        beer: Joi.object({
+            name: Joi.string().required(),
+            abv: Joi.number().required().min(0),
+            style: Joi.string().required(),
+            ibu: Joi.number().required().min(0),
+            dryHops: Joi.number().required().min(0),
+            previewDescription: Joi.string().required(),
+            description: Joi.string().required(),
+            ontap: Joi.string().required(),
+        }).required()
+    })
+    const { error } = beerSchema.validate(req.body);
+    if (error) {
+        const message = error.details.map(element => element.message).join(',')
+        throw new ExpressError(message, 400)
+    }
+    //console.log(result);
     const beer = new Beer(req.body.beer)
     await beer.save();
     res.redirect(`/beers/${beer._id}`)
