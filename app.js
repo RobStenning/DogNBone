@@ -3,12 +3,12 @@ const path = require('path');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/dog-and-bone');
 const ejsMate = require('ejs-mate');
-const Joi = require('joi');
 const catchAsync = require('./tools/catchAsync');
 const ExpressError = require('./tools/ExpressError');
 const methodOverride = require('method-override');
 const Beer = require('./models/beers');
 const beers = require('./models/beers');
+const { beerSchema } = require('./validateSchemas/schemas.js');
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -51,25 +51,17 @@ app.get('/new', (req, res) => {
     res.render('beers/new');
 })
 
-app.post('/beers', catchAsync(async (req, res, next) => { 
-    const beerSchema = Joi.object({
-        beer: Joi.object({
-            name: Joi.string().required(),
-            abv: Joi.number().required().min(0),
-            style: Joi.string().required(),
-            ibu: Joi.number().required().min(0),
-            dryHops: Joi.number().required().min(0),
-            previewDescription: Joi.string().required(),
-            description: Joi.string().required(),
-            ontap: Joi.string().required(),
-        }).required()
-    })
+const validateBeer = (req, res, next) => {
     const { error } = beerSchema.validate(req.body);
     if (error) {
         const message = error.details.map(element => element.message).join(',')
         throw new ExpressError(message, 400)
+    } else {
+        next();
     }
-    //console.log(result);
+}
+
+app.post('/beers', validateBeer, catchAsync(async (req, res, next) => { 
     const beer = new Beer(req.body.beer)
     await beer.save();
     res.redirect(`/beers/${beer._id}`)
@@ -85,7 +77,7 @@ app.get('/beers/:id/edit', catchAsync(async (req, res, next) => {
     res.render('beers/edit', { beer })
 }))
 
-app.put('/beers/:id', catchAsync( async (req, res, next) => {
+app.put('/beers/:id', validateBeer, catchAsync( async (req, res, next) => {
     const { id } = req.params
     const beer = await beers.findByIdAndUpdate(id, { ...req.body.beer })
     res.redirect(`/beers/${beer._id}`)
