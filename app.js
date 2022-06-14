@@ -3,12 +3,13 @@ const path = require('path');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/dog-and-bone');
 const ejsMate = require('ejs-mate');
+const session = require('express-session');
+const flash = require('connect-flash');
 const catchAsync = require('./tools/catchAsync');
 const ExpressError = require('./tools/ExpressError');
 const methodOverride = require('method-override');
 const Beer = require('./models/beers');
-const beers = require('./models/beers');
-const { beerSchema } = require('./validateSchemas/schemas.js');
+const beerRoutes = require('./routes/beers')
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -20,11 +21,31 @@ const app = express();
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
-app.use(express.urlencoded({ extended: true }))
-app.use(methodOverride('_method'))
-app.use('/styles', express.static(__dirname + '/styles'))
+app.use('/styles', express.static(__dirname + '/styles'));
+app.use(express.static('public'));
+app.use('/public', express.static(__dirname + '/public'));
+
+const sessionConfig = {
+    secret: 'TheSecret',
+    resave: false,
+    saveUninitialized: true,
+    cookies: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 ^ 24 * 7,
+        maxAge: 1000 * 60 * 60 ^ 24 * 7
+    }
+}
+
+app.use(session(sessionConfig));
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    next();
+})
 
 app.get('/', async (req, res) => {
     const beers = await Beer.find({});
@@ -51,43 +72,9 @@ app.get('/new', (req, res) => {
     res.render('beers/new');
 })
 
-const validateBeer = (req, res, next) => {
-    const { error } = beerSchema.validate(req.body);
-    if (error) {
-        const message = error.details.map(element => element.message).join(',')
-        throw new ExpressError(message, 400)
-    } else {
-        next();
-    }
-}
 
-app.post('/beers', validateBeer, catchAsync(async (req, res, next) => { 
-    const beer = new Beer(req.body.beer)
-    await beer.save();
-    res.redirect(`/beers/${beer._id}`)
-}))
 
-app.get('/beers/:id', catchAsync(async (req, res, next) => {
-    const beer = await Beer.findById(req.params.id)
-    res.render('beers/info', { beer })
-}))
-
-app.get('/beers/:id/edit', catchAsync(async (req, res, next) => {
-    const beer = await Beer.findById(req.params.id)
-    res.render('beers/edit', { beer })
-}))
-
-app.put('/beers/:id', validateBeer, catchAsync( async (req, res, next) => {
-    const { id } = req.params
-    const beer = await beers.findByIdAndUpdate(id, { ...req.body.beer })
-    res.redirect(`/beers/${beer._id}`)
-}))
-
-app.delete('/beers/:id', catchAsync(async (req, res, next) => {
-    const { id } = req.params;
-    await beers.findByIdAndDelete(id)
-    res.redirect('/taplist')
-}))
+app.use('/beers', beerRoutes)
 
 app.get('/login', (req, res) =>{
     res.render('login');
