@@ -18,7 +18,7 @@ const validateBeer = (req, res, next) => {
 router.post('/', validateBeer, catchAsync(async (req, res, next) => { 
     const beer = new Beer(req.body.beer)
     await beer.save();
-    req.flash('success', 'New beer added')
+    req.flash('success', 'New Beer Added')
     res.redirect(`/beers/${beer._id}`)
 }))
 
@@ -41,6 +41,7 @@ router.put('/:id', validateBeer, catchAsync( async (req, res, next) => {
 router.delete('/:id', catchAsync(async (req, res, next) => {
     const { id } = req.params;
     await Beer.findByIdAndDelete(id)
+    req.flash('deleted', 'Beer Deleted')
     res.redirect('/taplist')
 }))
 

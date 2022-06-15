@@ -1,6 +1,11 @@
 <% layout('../layouts/boilerplate')%>
 <main>
     <div class="allcontent" >
+        <div class="menuflex-container">
+            <div class="flex-item">
+            <p class="new-beer"><%= success %></p>
+            </div>
+        </div>
         <p class="title" ><%= beer.name %></p>
         <div class="imageblocks" >
             <div>            
@@ -15,8 +20,7 @@
                 <p class="descriptiontext" ><%= beer.description%></p>
             </div>
         </div>
-        <br>
-        <%= success %>
+        <br>   
         <div class="menuflex-container" >
             <div class="flex-item">
             <a id="editButton" href="/beers/<%=beer._id %>/edit">Edit Beer</a>

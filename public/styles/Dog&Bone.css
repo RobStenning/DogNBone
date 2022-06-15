@@ -194,6 +194,23 @@ h2{
     padding: 0px 20% 0px 20%;
     margin: 0;
 }
+
+.new-beer {
+	text-align: center;
+    font-family: 'Rock Salt', cursive;
+	color: green;
+    font-size: 3rem;
+	padding-top: 75px;
+}
+
+.deleted-beer {
+	text-align: center;
+    font-family: 'Rock Salt', cursive;
+	color: red;
+    font-size: 3rem;
+	padding-top: 75px;
+}
+
 .title {
     text-align: center;
     font-family: 'Rock Salt', cursive;

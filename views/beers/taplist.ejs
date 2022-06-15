@@ -1,6 +1,12 @@
 <% layout('../layouts/boilerplate')%>
 <main>
 	<div class="allcontent">
+		<div class="menuflex-container">
+            <div class="flex-item">
+            <p class="deleted-beer"><%= deleted %></p>
+            <p class="new-beer"><%= success %></p>
+            </div>
+        </div>
     <% if (displayOntap) {%>
 		<p class="title" id="ontap" >~ On Tap ~</p>
 		<% } else { %>
