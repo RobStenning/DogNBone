@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const catchAsync = require('../tools/catchAsync');
 const { beerSchema } = require('../validateSchemas/schemas.js');
+const { isLoggedIn } = require('../tools/middleware')
 const ExpressError = require('../tools/ExpressError');
 const Beer = require('../models/beers');
 
@@ -27,7 +28,7 @@ router.get('/:id', catchAsync(async (req, res, next) => {
     res.render('beers/info', { beer })
 }))
 
-router.get('/:id/edit', catchAsync(async (req, res, next) => {
+router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res, next) => {
     const beer = await Beer.findById(req.params.id)
     res.render('beers/edit', { beer })
 }))
@@ -38,7 +39,7 @@ router.put('/:id', validateBeer, catchAsync( async (req, res, next) => {
     res.redirect(`/beers/${beer._id}`)
 }))
 
-router.delete('/:id', catchAsync(async (req, res, next) => {
+router.delete('/:id', isLoggedIn, catchAsync(async (req, res, next) => {
     const { id } = req.params;
     await Beer.findByIdAndDelete(id)
     req.flash('deleted', 'Beer Deleted')

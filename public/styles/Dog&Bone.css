@@ -211,6 +211,13 @@ h2{
 	padding-top: 75px;
 }
 
+.error {
+	text-align: center;
+    font-family: 'Rock Salt', cursive;
+	color: red;
+    font-size: 1rem;
+}
+
 .title {
     text-align: center;
     font-family: 'Rock Salt', cursive;

@@ -6,6 +6,7 @@ const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const flash = require('connect-flash');
 const catchAsync = require('./tools/catchAsync');
+const { isLoggedIn } = require('./tools/middleware');
 const ExpressError = require('./tools/ExpressError');
 const methodOverride = require('method-override');
 const passport = require('passport');
@@ -56,6 +57,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
     res.locals.success = req.flash('success');
     res.locals.deleted = req.flash('deleted');
+    res.locals.error = req.flash('error');
     next();
 })
 
@@ -82,7 +84,7 @@ app.get('/previousbeers', catchAsync(async (req, res, next) => {
     res.render('beers/previousbeers', { beers, displayPrevious});
 }))
 
-app.get('/new', (req, res) => {
+app.get('/new', isLoggedIn, (req, res) => {
     res.render('beers/new');
 })
 
@@ -92,6 +94,14 @@ app.use('/beers', beerRoutes)
 
 app.get('/login', (req, res) =>{
     res.render('login');
+})
+
+app.get('/logout', (req, res) => {
+    req.logout(function(err) {
+        if (err) {return next(err)}
+        req.flash('success', 'logged out');
+        res.redirect('/taplist');
+    });
 })
 
 app.all('*', (req, res, next) => {
