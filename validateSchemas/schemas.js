@@ -1,15 +1,37 @@
-const Joi = require('joi')
+const BaseJoi = require('joi')
+const sanitizedHtml = require('sanitize-html')
 
+const extension = (joi) => ({
+    type: 'string',
+    base: joi.string(),
+    messages: {
+        'string.escapeHTML': '{{#label}} must not include HTML'
+    },
+    rules: {
+        escapeHTML: {
+            validate(value, helpers) {
+                const clean = sanitizedHtml(value, {
+                    allowedTags: [],
+                    allowedAttributes: {},
+                });
+                if (clean !== value) return helpers.error('string.escapeHTML', { value })
+                return clean;
+            }
+        }
+    }
+});
+
+const Joi = BaseJoi.extend(extension)
 
 module.exports.beerSchema = Joi.object({
     beer: Joi.object({
-        name: Joi.string().required(),
+        name: Joi.string().required().escapeHTML(),
         abv: Joi.number().required().min(0),
-        style: Joi.string().required(),
+        style: Joi.string().required().escapeHTML(),
         ibu: Joi.number().required().min(0),
         dryHops: Joi.number().required().min(0),
-        previewDescription: Joi.string().required(),
-        description: Joi.string().required(),
-        ontap: Joi.string().required(),
+        previewDescription: Joi.string().required().escapeHTML(),
+        description: Joi.string().required().escapeHTML(),
+        ontap: Joi.string().required().escapeHTML(),
     }).required()
 });

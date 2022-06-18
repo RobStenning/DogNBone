@@ -22,6 +22,7 @@
         </div>
         <br>   
         <div class="menuflex-container" >
+            <% if(currentUser) { %> 
             <div class="flex-item">
             <a id="editButton" href="/beers/<%=beer._id %>/edit">Edit Beer</a>
             </div>
@@ -31,6 +32,11 @@
             <div class="flex-item">
                 <a class="flex-item" href="/taplist">All Beers</a>
             </div>
+            <% } else { %> 
+            <div class="flex-item">
+                <a class="flex-item" href="/taplist">All Beers</a>
+            </div>
+            <% } %> 
         </div>
     </div>
 </main>

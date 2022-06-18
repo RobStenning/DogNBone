@@ -16,7 +16,7 @@ const validateBeer = (req, res, next) => {
     }
 }
 
-router.post('/', validateBeer, catchAsync(async (req, res, next) => { 
+router.post('/', isLoggedIn, validateBeer, catchAsync(async (req, res, next) => { 
     const beer = new Beer(req.body.beer)
     await beer.save();
     req.flash('success', 'New Beer Added')

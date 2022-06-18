@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -11,10 +15,11 @@ const ExpressError = require('./tools/ExpressError');
 const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const User = require('./models/user')
+const User = require('./models/user');
 const Beer = require('./models/beers');
-const beerRoutes = require('./routes/beers')
-const userRoute = require('./routes/users')
+const beerRoutes = require('./routes/beers');
+const userRoute = require('./routes/users');
+const mongoSanitize = require('express-mongo-sanitize');
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -33,13 +38,16 @@ app.use(methodOverride('_method'));
 app.use('/styles', express.static(__dirname + '/styles'));
 app.use(express.static('public'));
 app.use('/public', express.static(__dirname + '/public'));
+app.use(mongoSanitize());
 
 const sessionConfig = {
+    name: 'session',
     secret: 'TheSecret',
     resave: false,
     saveUninitialized: true,
-    cookies: {
+    cookie: {
         httpOnly: true,
+        //secure: true,
         expires: Date.now() + 1000 * 60 * 60 ^ 24 * 7,
         maxAge: 1000 * 60 * 60 ^ 24 * 7
     }
@@ -55,6 +63,7 @@ passport.deserializeUser(User.deserializeUser());
 
 
 app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.deleted = req.flash('deleted');
     res.locals.error = req.flash('error');
