@@ -23,7 +23,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const db = mongoose.connection;
 
 //const dbUrl = process.env.DB_URL;
-const dbUrl = 'mongodb://localhost:27017/dog-and-bone';
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/dog-and-bone';
 mongoose.connect(dbUrl);
 
 db.on("error", console.error.bind(console, "connection error:"));
@@ -44,9 +44,10 @@ app.use(express.static('public'));
 app.use('/public', express.static(__dirname + '/public'));
 app.use(mongoSanitize());
 
+const secret = process.env.SECRET || 'TheSecret';
 const store = MongoStore.create({
     mongoUrl: dbUrl,
-    secret: 'TheSecret',
+    secret,
     touchAfter: 24 * 3600
 });
 
@@ -57,7 +58,7 @@ store.on('error', function (e) {
 const sessionConfig = {
     store,
     name: 'session',
-    secret: 'TheSecret',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
