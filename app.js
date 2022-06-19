@@ -5,9 +5,9 @@ if (process.env.NODE_ENV !== "production") {
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/dog-and-bone');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const catchAsync = require('./tools/catchAsync');
 const { isLoggedIn } = require('./tools/middleware');
@@ -20,8 +20,12 @@ const Beer = require('./models/beers');
 const beerRoutes = require('./routes/beers');
 const userRoute = require('./routes/users');
 const mongoSanitize = require('express-mongo-sanitize');
-
 const db = mongoose.connection;
+
+//const dbUrl = process.env.DB_URL;
+const dbUrl = 'mongodb://localhost:27017/dog-and-bone';
+mongoose.connect(dbUrl);
+
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
     console.log("database connected");
@@ -40,7 +44,18 @@ app.use(express.static('public'));
 app.use('/public', express.static(__dirname + '/public'));
 app.use(mongoSanitize());
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    secret: 'TheSecret',
+    touchAfter: 24 * 3600
+});
+
+store.on('error', function (e) {
+    console.log('Session store error', e)
+});
+
 const sessionConfig = {
+    store,
     name: 'session',
     secret: 'TheSecret',
     resave: false,
@@ -60,7 +75,6 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
