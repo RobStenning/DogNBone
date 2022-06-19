@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const BeerSchema = new Schema({
+    tapNo: Number,
     name: String,
     abv: Number,
     style: String,

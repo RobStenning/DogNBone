@@ -12,6 +12,7 @@
 		<% } else { %>
 			<% console.log(`pouring not found`)%>
 		<%}%>
+		<% beers.sort(function(a, b){return a.tapNo - b.tapNo}) %> 
         <% for (let beer of beers) {%>
 			<%if(beer.ontap === 'pouring') {%>
 			<div class="imageblocks">

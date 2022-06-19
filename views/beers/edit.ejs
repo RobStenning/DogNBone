@@ -5,9 +5,12 @@
     <div  class="edit-page">
     <form action="/beers/<%=beer._id%>?_method=PUT" method="POST">
         <div class="edit-container">
+            <label class="edit-flex-item" for="name">Tap Number</label>
+            <input class="edit-flex-item" type="number" id="tapno" name="beer[tapNo]" value="<%=beer.tapNo%>">
+        </div>
+        <div class="edit-container">
             <label class="edit-flex-item" for="name">Name</label>
             <input class="edit-flex-item" type="text" id="name" name="beer[name]" value="<%=beer.name%>">
-            
         </div>
         <div class="edit-container">
             <label class="edit-flex-item" for="abv">ABV</label>

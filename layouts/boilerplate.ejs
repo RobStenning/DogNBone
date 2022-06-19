@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta http-equiv="Content-Security-Policy" 
+    content="
+      worker-src blob:; 
+      child-src blob: gap:;
+      img-src 'self' https://live.staticflickr.com/ https://images.unsplash.com/;
+      default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
     <title>DOG & BONE BEER Co</title>
     <link rel="stylesheet" type="text/css" href="/public/styles/Dog&Bone.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

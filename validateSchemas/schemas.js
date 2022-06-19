@@ -25,6 +25,7 @@ const Joi = BaseJoi.extend(extension)
 
 module.exports.beerSchema = Joi.object({
     beer: Joi.object({
+        tapNo: Joi.number().required().min(1),
         name: Joi.string().required().escapeHTML(),
         abv: Joi.number().required().min(0),
         style: Joi.string().required().escapeHTML(),

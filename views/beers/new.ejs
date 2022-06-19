@@ -8,6 +8,10 @@
         <div>
             <form action="/beers" method="POST">
                 <div class="edit-container">
+                    <label class="edit-flex-item" for="name">Tap Number</label>
+                    <input class="edit-flex-item" type="number" id="tapno" name="beer[tapNo]" required>
+                </div>
+                <div class="edit-container">
                     <label class="edit-flex-item" for="name">Name</label>
                     <input class="edit-flex-item" type="text" id="name" name="beer[name]" required>
                 </div>
