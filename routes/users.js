@@ -5,13 +5,13 @@ const User = require('../models/user');
 const passport = require('passport');
 const { isLoggedIn } = require('../tools/middleware');
 
-if (process.env.NODE_ENV === "production"){
+if (process.env.NODE_ENV !== "production"){
 router.get('/register', (req, res) => {
     res.render('register')
 })
 }
 
-if (process.env.NODE_ENV === "production"){
+if (process.env.NODE_ENV !== "production"){
 router.post('/register', catchAsync(async (req, res) => {
     try {
         const { email, username, password } = req.body;
