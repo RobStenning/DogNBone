@@ -22,7 +22,6 @@ const userRoute = require('./routes/users');
 const mongoSanitize = require('express-mongo-sanitize');
 const db = mongoose.connection;
 
-//const dbUrl = process.env.DB_URL;
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/dog-and-bone';
 mongoose.connect(dbUrl);
 
@@ -138,7 +137,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err });
 })
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log(`serving on port ${port}`)

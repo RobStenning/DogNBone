@@ -11,7 +11,7 @@ router.get('/register', (req, res) => {
 })
 }
 
-if (process.env.NODE_ENV !== "production"){
+if (process.env.NODE_ENV === "production"){
 router.post('/register', catchAsync(async (req, res) => {
     try {
         const { email, username, password } = req.body;
