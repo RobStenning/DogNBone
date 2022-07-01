@@ -166,7 +166,7 @@ h2{
 .title {
     text-align: center;
     font-family: 'Rock Salt', cursive;
-    font-size: 3rem;
+    font-size: 2rem;
 	background: rgba(0, 0, 0, 0.25);
     padding-top: 75px;
     padding-bottom: 5px;
@@ -191,20 +191,23 @@ h2{
     padding-left: 3rem;
     padding-right: 3rem;
 }
-.imageblocks {
+.login {
 	object-fit: cover;
 	display: flex;
 	background: rgba(0, 0, 0, 0.25);
     padding: 1rem;
 	padding-left: 7.5rem;
 	padding-right: 7.5rem;
-	
-	
   }
+
+  .form {
+	display: inline-grid;
+    flex: auto;
+    padding: 40px;
+}
+
   .imageblocks > img {
 	margin: .3rem 1rem 0.5rem 0;
-	
-
   }
   .imageblocks > div {
 	flex: 1;
@@ -256,6 +259,9 @@ h2{
 /* End Main Content */
 
 .footerbox {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 	padding: 1em;
 	color: white;
 	background-color: #000000;

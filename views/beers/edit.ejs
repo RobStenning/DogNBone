@@ -1,0 +1,61 @@
+<% layout('../layouts/boilerplate')%>
+<main>
+<div class="allcontent">
+    <h1 class="beertitle">edit beer</h1>
+    <div  class="edit-page">
+    <form action="/beers/<%=beer._id%>?_method=PUT" method="POST">
+        <div class="edit-container">
+            <label class="edit-flex-item" for="name">Tap Number</label>
+            <input class="edit-flex-item" type="number" id="tapno" name="beer[tapNo]" value="<%=beer.tapNo%>">
+        </div>
+        <div class="edit-container">
+            <label class="edit-flex-item" for="name">Name</label>
+            <input class="edit-flex-item" type="text" id="name" name="beer[name]" value="<%=beer.name%>">
+        </div>
+        <div class="edit-container">
+            <label class="edit-flex-item" for="abv">ABV</label>
+            <input class="edit-flex-item" type="text" id="abv" name="beer[abv]" value="<%=beer.abv%>">
+        </div>
+        <div class="edit-container">
+            <label class="edit-flex-item" for="style">Style</label>
+            <input class="edit-flex-item" type="text" id="style" name="beer[style]" value="<%=beer.style%>">
+        </div>
+        <div class="edit-container">
+            <label class="edit-flex-item" for="ibu">IBU</label>
+            <input class="edit-flex-item" type="text" id="ibu" name="beer[ibu]" value="<%=beer.ibu%>">
+        </div>
+        <div class="edit-container">
+            <label class="edit-flex-item" for="dryHops">Dry Hops</label>
+            <input class="edit-flex-item" type="text" id="dryHops" name="beer[dryHops]" value="<%=beer.dryHops%>">
+        </div>
+        <div class="edit-container">
+            <label  class="edit-flex-item"for="previewDescription">Preview Description</label>
+            <textarea class="edit-flex-item" type="text" id="previewDescription" name="beer[previewDescription] "cols="30" rows="10"><%=beer.previewDescription%></textarea>
+        </div>
+        <div class="edit-container">
+            <label class="edit-flex-item" for="description">Description</label>
+            <textarea class="edit-flex-item" type="text" id="description" name="beer[description] "cols="30" rows="10"><%=beer.description%></textarea>
+        </div>
+        <div class="edit-container">
+            <label for="ontap">On Tap</label>
+                <select name="beer[ontap]" id="ontap">
+                <option value="pouring">Pouring</option>
+                <option value="kegged">Kegged</option>
+                <option value="previous">Previous</option>
+                <option value="bottled">Bottled</option>
+            </select>
+            <script defer>document.getElementById('ontap').value = "<%=beer.ontap%>";</script>
+        </div>
+        <div class="edit-container-button" >        
+            <button id="editButton" class="edit-flex-item">Edit Beer</button>
+            <a class="edit-flex-item" href="/beers/<%=beer._id%>">back</a>    
+        </div>
+        </form>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+</main>

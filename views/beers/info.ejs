@@ -1,0 +1,42 @@
+<% layout('../layouts/boilerplate')%>
+<main>
+    <div class="allcontent" >
+        <div class="menuflex-container">
+            <div class="flex-item">
+            <p class="new-beer"><%= success %></p>
+            </div>
+        </div>
+        <p class="title" ><%= beer.name %></p>
+        <div class="imageblocks" >
+            <div>            
+                <ul class="menuflex-container" >
+                    <li class="flex-item" >ABV - <%= beer.abv%></li>
+                    <li class="flex-item" >STYLE - <%= beer.style%></li>
+                    <li class="flex-item" >IBU - <%= beer.ibu%></li>
+                    <li class="flex-item" >DRY HOPS - <%= beer.dryHops%></li>
+                    <li class="flex-item" >STATUS - <%= beer.ontap%></li>
+                </ul>
+                <br>
+                <p class="descriptiontext" ><%= beer.description%></p>
+            </div>
+        </div>
+        <br>   
+        <div class="menuflex-container" >
+            <% if(currentUser) { %> 
+            <div class="flex-item">
+            <a id="editButton" href="/beers/<%=beer._id %>/edit">Edit Beer</a>
+            </div>
+            <form class="flex-item" action="/beers/<%=beer._id%>?_method=DELETE" method="POST" >
+                <button id="deleteButton" >Delete Beer</button>
+            </form>
+            <div class="flex-item">
+                <a class="flex-item" href="/taplist">All Beers</a>
+            </div>
+            <% } else { %> 
+            <div class="flex-item">
+                <a class="flex-item" href="/taplist">All Beers</a>
+            </div>
+            <% } %> 
+        </div>
+    </div>
+</main>

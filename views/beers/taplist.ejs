@@ -1,0 +1,96 @@
+<% layout('../layouts/boilerplate')%>
+<main>
+	<div class="allcontent">
+		<div class="menuflex-container">
+            <div class="flex-item">
+            <div class="deleted-beer"><%= deleted %></div>
+            <div class="new-beer"><%= success %></div>
+            </div>
+        </div>
+    <% if (displayOntap) {%>
+		<p class="title" id="ontap" >~ On Tap ~</p>
+		<% } else { %>
+			<% console.log(`pouring not found`)%>
+		<%}%>
+		<% beers.sort(function(a, b){return a.tapNo - b.tapNo}) %> 
+        <% for (let beer of beers) {%>
+			<%if(beer.ontap === 'pouring') {%>
+			<div class="imageblocks">
+				<div>
+					<h1 class="beertitle">- <%= beer.name %> -</h1>
+					<ul class="menuflex-container">
+						<li class="flex-item">ABV - <%= beer.abv %>%</li>
+						<li class="flex-item">STYLE - <%= beer.style %></li>
+						<li class="flex-item">IBU - <%= beer.ibu %></li>
+						<li class="flex-item">DRY HOPS - <%= beer.dryHops %> g/l</li>
+				  	</ul>
+					<br>
+					<p class="descriptiontext"><%= beer.description %>
+					<br>
+					<br>
+					<a href="/beers/<%=beer._id%>">more</a>
+				</div>
+			</div>
+	<%}}%>
+	<% if (displayBottled) {%>
+		<p class="title">~ Bottled ~</p>
+		<% } else { %>
+			<% console.log(`bottled not found`)%>
+		<%}%>
+		<% for (let beer of beers) {%>
+			<%if(beer.ontap === 'bottled') {%>
+			<div class="imageblocks">
+				<div>
+					<h1 class="beertitle">- <%= beer.name %> -</h1>
+					<ul class="menuflex-container">
+						<li class="flex-item">ABV - <%= beer.abv %>%</li>
+						<li class="flex-item">STYLE - <%= beer.style %></li>
+						<li class="flex-item">IBU - <%= beer.ibu %></li>
+						<li class="flex-item">DRY HOPS - <%= beer.dryHops %> g/l</li>
+					  </ul>
+					<br>
+					<p class="descriptiontext"><%= beer.description %>
+					<br>
+					<br>
+					<a href="/beers/<%=beer._id%>">more</a>
+				</div>
+			</div>
+	<%}}%>		
+	<% if (displayIncoming) {%>
+		<p class="title">~ Incoming ~</p>
+		<% } else { %>
+			<% console.log(`kegged not found`)%>
+		<%}%>
+	<% for (let beer of beers) {%>
+		<%if(beer.ontap === 'kegged') {%>
+		<div class="imageblocks">
+			<div>
+				<h1 class="beertitle">- <%= beer.name %> -</h1>
+				<ul class="menuflex-container">
+					<li class="flex-item">ABV - <%= beer.abv %>%</li>
+					<li class="flex-item">STYLE - <%= beer.style %></li>
+					<li class="flex-item">IBU - <%= beer.ibu %></li>
+					<li class="flex-item">DRY HOPS - <%= beer.dryHops %> g/l</li>
+				  </ul>
+				<br>
+				<p class="descriptiontext"><%= beer.description %>
+				<br>
+				<br>
+				<a href="/beers/<%=beer._id%>">more</a>
+			</div>
+		</div>
+<%}}%>
+<% if (displayPrevious) {%>
+	<h1 class="beertitle">
+		<a href="/previousbeers">~ see previous beers ~</a>
+	</h1>
+	<% } else { %>
+		<% console.log(`previous not found`)%>
+	<%}%>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>	
+</main>

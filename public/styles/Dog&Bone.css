@@ -1,0 +1,333 @@
+@charset 'UTF-8';
+
+html,
+html * {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	scroll-behavior: smooth;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+@media screen and (max-width: 720px) {
+	div.navcontent {
+		display: none;
+	}	
+}
+@media screen and (max-width: 1050px) {
+	.beerdescription {
+		display: none;
+	}	
+}
+
+/* unvisited link */
+a:link {
+	color: white;
+	text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+  color: white;
+}
+
+/* mouse over link */
+a:hover {
+  color: grey;
+}
+
+/* selected link */
+a:active {
+  color: grey;
+}
+
+#deleteButton:hover {
+	color: red;
+}
+
+#editButton:hover {
+	color: green;
+}
+
+.loginButton {
+    font-size: 1.25rem;
+    text-align: center;
+    font-family: 'Rock Salt', cursive;
+	width: 100%;
+	margin-top: 20px;
+	align-items: center;
+}
+
+body {
+	font-family: 'raleway', sans-serif;
+	font-size: 1vw;
+	color: rgb(255, 255, 255);
+	background: rgb(0, 0, 0);
+}
+
+header {
+	position: fixed;
+	padding: 15px;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: ;
+	background:rgba(1,0,0);
+}
+
+nav {
+	display: flex;
+	height: 35px;
+	
+}
+
+.logonav {
+	height: 35px;
+	float: left;
+}
+
+.logotextnav {
+	height: 35px;
+	float: left;
+	padding-left: .5em;
+}
+ 
+.navbox {
+	flex-basis: auto;
+	justify-content: top;
+	font-family: 'Rock Salt', cursive;
+	font-size: 20px;
+	align-items: top;
+	flex-direction: column;
+	text-align: top;
+	align-self: top;
+	color: #000000;
+	border-left: 1em solid transparent;
+	border-right: 1em solid transparent;
+	display: inline-flex;
+}
+
+.hero {
+	position: relative;
+	height: 54vw;
+	background-color: #000000;
+	background-image: url("Media/BackgroundLogo.svg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%
+}
+
+.brewery {
+	position: relative;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding-top: 3.5em;
+}
+
+p {
+	font-size: 1rem;
+	font-family: 'Raleway', sans-serif;
+}
+
+h1{
+	font-size: 1.25rem;
+	font-family: 'Rock Salt', cursive;
+}
+h2{
+	font-size: .9rem;
+	font-family: 'Rock Salt', cursive;
+}
+.menuflex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  
+.flex-item {
+    font-size: 1.25rem;
+    text-align: center;
+    font-family: 'Rock Salt', cursive;
+}
+
+.edit-page {
+	justify-content: center;
+}
+
+.edit-container {
+	display: flex;
+    flex-flow: row wrap;
+	justify-content: space-evenly;
+    padding: 0px 20% 0px 20%;
+    margin: 0;
+}
+
+.edit-flex-item {
+	width: 100%;
+    font-size: 1.25rem;
+    justify-content: flex-start;
+    font-family: 'Rock Salt', cursive;
+}
+
+.edit-flex-item input {
+	width: 100%;
+    font-size: 1.25rem;
+    justify-content: flex-start;
+    font-family: 'roboto', cursive;
+}
+
+.edit-container-button {
+	display: flex;
+    flex-flow: row ;
+	justify-content: space-evenly;
+    padding: 0px 20% 0px 20%;
+    margin: 0;
+}
+
+.new-beer {
+	text-align: center;
+    font-family: 'Rock Salt', cursive;
+	color: green;
+    font-size: 3rem;
+	padding-top: 75px;
+}
+
+.deleted-beer {
+	text-align: center;
+    font-family: 'Rock Salt', cursive;
+	color: red;
+    font-size: 3rem;
+	padding-top: 75px;
+}
+
+.error {
+	text-align: center;
+    font-family: 'Rock Salt', cursive;
+	color: red;
+    font-size: 1rem;
+}
+
+.title {
+    text-align: center;
+    font-family: 'Rock Salt', cursive;
+    font-size: 3rem;
+	background: rgba(0, 0, 0, 0.25);
+    padding-top: 75px;
+    padding-bottom: 5px;
+}
+
+.beertitle {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.25);
+    font-weight: 500;
+    font-size: 2rem;
+    padding-top:1em;
+}
+
+.infotitle {
+    text-align: center;
+    flex: auto;
+	background: rgba(0, 0, 0, 0.25);
+}
+
+.descriptiontext {
+    font-size: 1.5rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.imageblocks {
+	object-fit: cover;
+	display: flex;
+	background: rgba(0, 0, 0, 0.25);
+	padding: 1rem;
+	padding-left: 7.5rem;
+	padding-right: 7.5rem;
+	
+	
+  }
+  .imageblocks > img {
+	margin: .3rem 1rem 0.5rem 0;
+	
+
+  }
+  .imageblocks > div {
+	flex: 1;
+  }
+  .imageblocks h1 {
+	font-weight: 500;
+	margin: 0 0 0.3rem 0;
+  }
+
+.story {
+	position: relative;
+	padding-top: 3.5em;
+	}
+
+.squareimage {
+	height: 20rem;
+	width: 20rem;
+}
+
+.ontap {
+	position: relative;
+	padding-top: 3.5em;
+}
+
+.latest {
+	position: relative;
+	height: 30rem;
+}
+
+.allcontent {
+	background-image: linear-gradient(black, white)
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+}
+
+.error {
+	padding-top: 100px;
+	margin-left: 100px;
+	margin-right: 100px;
+	display: flex;
+    flex-flow: row wrap;
+	justify-content: space-evenly;
+}
+
+.error-item {
+	width: 90%;
+	display: flex;
+ 	justify-content: space-evenly;
+    font-family: 'Rock Salt', cursive;	
+}
+
+/* End Main Content */
+
+.footerbox {
+    position: fixed;
+    bottom: 0;
+    width: 100%;	padding: 1em;
+	color: white;
+	background-color: #000000;
+}
+
+.icons {
+	padding: .25em;
+}
+
+.footerlogo{
+	height: 2.5em;
+	float: right;
+}

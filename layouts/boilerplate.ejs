@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Security-Policy" 
+    content="
+      worker-src blob:; 
+      child-src blob: gap:;
+      img-src 'self' https://live.staticflickr.com https://images.unsplash.com/;
+      default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
+    <title>DOG & BONE BEER Co</title>
+    <link rel="stylesheet" type="text/css" href="/public/styles/Dog&Bone.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/styles//Media/">
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/styles/Media/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/styles/Media/favicon-16x16.png">
+    <link rel="manifest" href="/public/styles/Media/site.webmanifest">
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Rock+Salt&display=swap');
+    </style>
+    
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+    </style>
+
+<body>
+    <header>
+    
+		<!-- Navigation Menu -->
+        <nav class="flex-container">
+			<div>
+					<a href="#homelink">
+						<img src="/public/styles/Media/LogoIconWhite.svg" alt="" class="logonav">
+						<img src="/public/styles/Media/LogoTextWhite.svg" alt="" class="logotextnav">
+					</a>
+			</div>
+			<div class="navcontent">
+				<a href="#brewerylink" class="navbox">
+					<div>Brewery</div>
+				</a>
+				<a href="#ontaplink" class="navbox">
+					<div>On Tap</div>
+				</a>
+				<a href="#storylink" class="navbox">
+					<div>Story</div>
+				</a>
+				<a href="#latestlink" class="navbox">
+					<div>Latest</div>
+				</a>
+			</div>
+		</nav>
+	</header>
+	<%- body %>
+    <footer id="footercontent">
+		<div class="footerbox">
+			<a class="icons" href="#facebook">
+				<i class="fa fa-facebook-square" style="font-size:36px"></i>
+			</a>
+			<a class="icons" href="https://www.instagram.com/dogandbonebeerco/">
+				<i class="fa fa-instagram" style="font-size:36px"></i>
+			</a>
+			<a class="icons" href="mailto:robandgimli@gmail.com?subject=LET'S TALK ABOUT BEER!">
+				<i class="fa fa-envelope-o" style="font-size:36px"></i>
+			</a>
+			<img src="/public/styles/Media/LogoIconWhite.svg" alt="" class="footerlogo">
+		</div>
+	</footer>
+</body>
+</html>

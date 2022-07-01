@@ -113,7 +113,6 @@ nav {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	padding-top: 3.5em;
 }
 
 p {
@@ -130,11 +129,73 @@ h2{
 	font-family: 'Rock Salt', cursive;
 }
 
+.menuflex-container {
+    /* We first create a flex layout context */
+    display: flex;
+    
+    /* Then we define the flow direction 
+       and if we allow the items to wrap 
+     * Remember this is the same as:
+     * flex-direction: row;
+     * flex-wrap: wrap;
+     */
+    flex-flow: row wrap;
+    
+    /* Then we define how is distributed the remaining space */
+    justify-content: space-around;
+    
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  
+  .flex-item {
+    -background: tomato;
+    -padding: 5px;
+    -width: 200px;
+    -height: 150px;
+    -margin-top: 10px;
+    -line-height: 150px;
+    -color: white;
+    -font-weight: bold;
+    font-size: 1.25rem;
+    text-align: center;
+    font-family: 'Rock Salt', cursive;
+  }
+
+.title {
+    text-align: center;
+    font-family: 'Rock Salt', cursive;
+    font-size: 3rem;
+	background: rgba(0, 0, 0, 0.25);
+    padding-top: 75px;
+    padding-bottom: 5px;
+}
+
+.beertitle {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.25);
+    font-weight: 500;
+    font-size: 2rem;
+    padding-top:1em;
+}
+
+.infotitle {
+    text-align: center;
+    flex: auto;
+	background: rgba(0, 0, 0, 0.25);
+}
+
+.descriptiontext {
+    font-size: 1.5rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
 .imageblocks {
 	object-fit: cover;
 	display: flex;
 	background: rgba(0, 0, 0, 0.25);
-	padding: 1rem;
+    padding: 1rem;
 	padding-left: 7.5rem;
 	padding-right: 7.5rem;
 	
@@ -179,9 +240,25 @@ h2{
 	background-position: center;
 	background-size: 100%;
 }
+
+.intro {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.25);
+	font-family: 'raleway', sans-serif;
+	font-size: 1vw;
+    font-weight: 500;
+    font-size: 1.7rem;
+    padding-top:1em;
+	padding-left: 7.5rem;
+	padding-right: 7.5rem;
+}
+
 /* End Main Content */
 
 .footerbox {
+	position: fixed;
+    bottom: 0;
+    width: 100%;
 	padding: 1em;
 	color: white;
 	background-color: #000000;

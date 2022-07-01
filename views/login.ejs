@@ -1,0 +1,23 @@
+<% layout('../layouts/boilerplate')%>
+    <main>
+		<div class="allcontent">
+                <p class="title">~ Login ~</p>
+       		
+                <div class="menuflex-container">
+					    <form class="flex-item" action="/login" method="POST">
+                            username
+                            <input type="text" placeholder="username" name="username" required>
+                            <br>
+                            email
+                            <input type="email" placeholder="email" name="email" required>
+                            <br>
+                            password
+                            <input type="password" placeholder="*********" name="password" required>
+                            <br>
+                            <button class="loginButton">login</button>
+                        </form>
+                </div>
+                <div>
+                  <p class="error"><%= error %></p>
+                </div>
+    </main>

@@ -1,0 +1,15 @@
+<% layout('../layouts/boilerplate')%>
+<div class="error">    
+    <div class="error-item">
+        <h1>ERROR</h1>
+
+</div>
+<div class="error-item">
+    <h1><%=err.message%></h1>
+</div>
+<% if (process.env.NODE_ENV !== "production") {%> 
+<div class="error-item">
+    <p><%= err.stack %></p>
+</div>
+<% } %> 
+</div>
