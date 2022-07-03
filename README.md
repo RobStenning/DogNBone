@@ -13,4 +13,4 @@ the website can be seen here [dogandbonebeerco.co.uk](http://www.dogandbonebeerc
 
 Here is a GIF showing the admin features used to add and edit beers
 
-<a data-flickr-embed="true" href="https://www.flickr.com/photos/35mmaffair/52191527883/in/dateposted/" title="DNB"><img src="https://live.staticflickr.com/65535/52191527883_a6c2e4bdb2.jpg" width="500" height="241" alt="DNB"></a>
+<img src="DNB.gif?raw=true" width="200px">
