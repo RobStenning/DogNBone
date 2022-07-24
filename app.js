@@ -21,6 +21,7 @@ const beerRoutes = require('./routes/beers');
 const userRoute = require('./routes/users');
 const mongoSanitize = require('express-mongo-sanitize');
 const db = mongoose.connection;
+const axios = require('axios');
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/dog-and-bone';
 mongoose.connect(dbUrl);
@@ -111,7 +112,35 @@ app.get('/new', isLoggedIn, (req, res) => {
     res.render('beers/new');
 })
 
+const username = process.env.brewFatherUName;
+const password = process.env.brewFatherPassword;
+//let session_url = 'https://api.brewfather.app/v1/recipes/vIY6lRqNgvA5tLky59bhDU10P8Wdq0';
+let session_url = 'https://api.brewfather.app/v1/recipes/vIY6lRqNgvA5tLky59bhDU10P8Wdq0';
+let token = `${username}:${password}`;
+let encoded = Buffer.from(token).toString('base64');
 
+let config = {
+    method: 'get',
+    url: session_url,
+    headers: { 'Authorization': 'Basic '+ encoded }
+  };
+
+app.get('/recipe', (req, res) => {
+   axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data.carbonation));
+    console.log(JSON.stringify(response.data.hops[0].name));
+    console.log(JSON.stringify(response.data.hops[1].name));
+    console.log(JSON.stringify(response.data.hops[2].name));
+    console.log(JSON.stringify(response.data.hops[3].name));
+    console.log(JSON.stringify(response.data.hops[4].name));
+    console.log(JSON.stringify(response.data.hops.length));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+    res.render('beers/recipe');
+})
 
 app.use('/beers', beerRoutes)
 
