@@ -20,6 +20,28 @@
                 <p class="descriptiontext" ><%= beer.description%></p>
             </div>
         </div>
+        <% if(data === 'error'){%>
+
+            <% } else { %>
+
+        <div>
+            <p>test area for brewfather data</p>
+            <p class="descriptiontext" >BF Name = <%= beer.bfName%></p>
+            <p class="descriptiontext" >BF ID =<%= beer.bfId%></p>
+            <p class="descriptiontext" >Hops =<%= data.hops%></p>
+            <p class="descriptiontext" >yeast = <%= data.yeast %></p>
+        </div>
+        <p class="title" >Hops</p>
+        <div class="imageblocks" >
+            <div>            
+                <ul class="menuflex-container" >
+                    <li class="flex-item" >HOPS - <%= data.hops%></li>
+                    <li class="flex-item" >YEAST - <%= data.yeast%></li>
+                </ul>
+                <br>
+            </div>
+        </div>
+        <% } %> 
         <br>   
         <div class="menuflex-container" >
             <% if(currentUser) { %> 

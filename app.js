@@ -23,6 +23,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const db = mongoose.connection;
 const axios = require('axios');
 
+
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/dog-and-bone';
 mongoose.connect(dbUrl);
 
@@ -115,26 +116,36 @@ app.get('/new', isLoggedIn, (req, res) => {
 const username = process.env.brewFatherUName;
 const password = process.env.brewFatherPassword;
 //let session_url = 'https://api.brewfather.app/v1/recipes/vIY6lRqNgvA5tLky59bhDU10P8Wdq0';
-let session_url = 'https://api.brewfather.app/v1/recipes/vIY6lRqNgvA5tLky59bhDU10P8Wdq0';
+let session_url = 'https://api.brewfather.app/v1/recipes';
 let token = `${username}:${password}`;
 let encoded = Buffer.from(token).toString('base64');
 
-let config = {
+let axiosConfig = {
     method: 'get',
     url: session_url,
     headers: { 'Authorization': 'Basic '+ encoded }
   };
 
+let tempNewBeerName = 'PAW v3'
+
 app.get('/recipe', (req, res) => {
-   axios(config)
+   axios(axiosConfig)
   .then(function (response) {
+    for (let i = 0; i < response.data.length; i++){
+        console.log(JSON.stringify(response.data[i].name))
+        if (response.data[i].name === tempNewBeerName){
+            console.log(`${i} matches beer name`)
+            console.log(JSON.stringify(response.data[i]._id))
+        }
+    }
+    /*
     console.log(JSON.stringify(response.data.carbonation));
     console.log(JSON.stringify(response.data.hops[0].name));
     console.log(JSON.stringify(response.data.hops[1].name));
     console.log(JSON.stringify(response.data.hops[2].name));
     console.log(JSON.stringify(response.data.hops[3].name));
     console.log(JSON.stringify(response.data.hops[4].name));
-    console.log(JSON.stringify(response.data.hops.length));
+    console.log(JSON.stringify(response.data.hops.length));*/
   })
   .catch(function (error) {
     console.log(error);
@@ -143,6 +154,7 @@ app.get('/recipe', (req, res) => {
 })
 
 app.use('/beers', beerRoutes)
+
 
 app.get('/login', (req, res) =>{
     res.render('login');
