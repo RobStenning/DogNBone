@@ -62,7 +62,7 @@ router.get('/:id/check', getBrewFatherData, catchAsync(async (req, res, next) =>
     console.log(beer.bfId);
 }))
 
-*/
+
 function getSourBeerData() {
     axios.get('https://api.brewfather.app/v1/recipes/YOX7D8z2Iz8pH1PIdP1Wys9X3gCnSo')
   .then(function (response) {
@@ -74,7 +74,7 @@ function getSourBeerData() {
     console.log(error);
   })
 }
-
+*/
 
 
 router.post('/', isLoggedIn, validateBeer, catchAsync(async (req, res, next) => { 
@@ -86,17 +86,31 @@ router.post('/', isLoggedIn, validateBeer, catchAsync(async (req, res, next) => 
 
 router.get('/:id', catchAsync(async (req, res, next) => {
     const beer = await Beer.findById(req.params.id)
-    console.log(beer.bfId)
-    await axios({
+        await axios({
         method: 'get',
         url: 'https://api.brewfather.app/v1/recipes/' + beer.bfId,
         headers: { 'Authorization': 'Basic '+ encoded }
     })
     .then(function (response) {
+        let hops = [];
+        
+        for (let i = 0; i < response.data.hops.length; i++){
+            const hop = {
+            name: response.data.hops[i].name,
+            use: response.data.hops[i].use
+            };
+            //console.log(hop.name)
+            //console.log(hop.use)
+            hops.push(hop)
+        }
+        
+        //console.log(hops)
+        /*
+        previous working of hops array before moving to Map
         let hops = []
         for (let i = 0; i < response.data.hops.length; i++){
             hops.push(response.data.hops[i].name)
-        }
+        }*/
         /*
             for (let i = 0; i < response.data.length; i++){
         console.log(JSON.stringify(response.data[i].name))
@@ -118,7 +132,7 @@ router.get('/:id', catchAsync(async (req, res, next) => {
       console.log(error);
       return data = 'error'
     })
-    console.log(data.hops)
+    //console.log(data.hops)
     res.render('beers/info', { beer, data})
 }))
 

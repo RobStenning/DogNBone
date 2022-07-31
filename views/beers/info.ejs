@@ -23,24 +23,30 @@
         <% if(data === 'error'){%>
 
             <% } else { %>
-
+                <% //console.log(data.hops[0].name + ', ' + data.hops[0].use) %> 
+                <% let hopList = [] %>
+                 <% for (let i = 0; i < data.hops.length; i++){ %>
+                    <% hopList.push(data.hops[i].name) %>
+                    <% } %>   
         <div>
             <p>test area for brewfather data</p>
             <p class="descriptiontext" >BF Name = <%= beer.bfName%></p>
             <p class="descriptiontext" >BF ID =<%= beer.bfId%></p>
-            <p class="descriptiontext" >Hops =<%= data.hops%></p>
-            <p class="descriptiontext" >yeast = <%= data.yeast %></p>
+            <p class="descriptiontext" >Hops =<%= hopList.join(', ')%></p>
+            <p class="descriptiontext" >yeast = <%= data.yeast.join(' ') %></p>
         </div>
+        <% /* pre testing Map %> 
         <p class="title" >Hops</p>
         <div class="imageblocks" >
             <div>            
                 <ul class="menuflex-container" >
-                    <li class="flex-item" >HOPS - <%= data.hops%></li>
-                    <li class="flex-item" >YEAST - <%= data.yeast%></li>
+                    <li class="flex-item" ><%= data.hops.join(', ')%></li>
+                    <li class="flex-item" ><%= data.yeast.join(' ')%></li>
                 </ul>
                 <br>
             </div>
         </div>
+        <% */ %>
         <% } %> 
         <br>   
         <div class="menuflex-container" >
