@@ -22,31 +22,63 @@
         </div>
         <% if(data === 'error'){%>
 
-            <% } else { %>
-                <% //console.log(data.hops[0].name + ', ' + data.hops[0].use) %> 
-                <% let hopList = [] %>
+            <% } else { %> 
+                <% let hotSideHops = [] %>
+                <% let dryHops = [] %>
+                <% let malts = [] %>
                  <% for (let i = 0; i < data.hops.length; i++){ %>
-                    <% hopList.push(data.hops[i].name) %>
-                    <% } %>   
-        <div>
-            <p>test area for brewfather data</p>
-            <p class="descriptiontext" >BF Name = <%= beer.bfName%></p>
-            <p class="descriptiontext" >BF ID =<%= beer.bfId%></p>
-            <p class="descriptiontext" >Hops =<%= hopList.join(', ')%></p>
-            <p class="descriptiontext" >yeast = <%= data.yeast.join(' ') %></p>
-        </div>
-        <% /* pre testing Map %> 
+                    <% if (data.hops[i].use === 'Dry Hop'){ %> 
+                    <% dryHops.push(data.hops[i]) %>
+                    <% } else {%>
+                        <% hotSideHops.push(data.hops[i]) %>
+                        <% }} %>
+                    <% let dryHopsList = [] %> 
+                    <% let hotSideHopsList = [] %> 
+                    <% for (let i = 0; i < hotSideHops.length; i++){ %>
+                            <% hotSideHopsList.push(hotSideHops[i].name)} %>
+                    <% for (let i = 0; i < dryHops.length; i++){ %>
+                            <% dryHopsList.push(dryHops[i].name)} %>
+                    <% for (let i = 0; i < data.malts.length; i++){ %>
+                             <% malts.push(data.malts[i].name)} %>    
+
+        <% %> 
         <p class="title" >Hops</p>
         <div class="imageblocks" >
             <div>            
                 <ul class="menuflex-container" >
-                    <li class="flex-item" ><%= data.hops.join(', ')%></li>
-                    <li class="flex-item" ><%= data.yeast.join(' ')%></li>
+                    <li class="flex-item" >Bitter/Aroma <%= hotSideHopsList.join(', ')%></li>
+                    <li class="flex-item" >Dry Hops <%= dryHopsList.join(' ')%></li>
                 </ul>
                 <br>
             </div>
         </div>
-        <% */ %>
+        <p class="title" >Malts</p>
+        <div class="imageblocks" >
+            <div>            
+                <ul class="menuflex-container" >
+                    <li class="flex-item" >Malts <%= malts.join(', ')%></li>
+                </ul>
+                <br>
+            </div>
+        </div>
+        <p class="title" >Yeast</p>
+        <div class="imageblocks" >
+            <div>            
+                <ul class="menuflex-container" >
+                    <li class="flex-item" ><%= data.yeast.join(', ')%></li>
+                </ul>
+                <br>
+            </div>
+        </div>
+        <div>
+            <p>test area for brewfather data</p>
+            <p class="descriptiontext" >BF Name = <%= beer.bfName%></p>
+            <p class="descriptiontext" >BF ID =<%= beer.bfId%></p>
+            <p class="descriptiontext" >Hot Side Hops =<%= hotSideHopsList.join(', ')%></p>
+            <p class="descriptiontext" >Dry Hops = <%= dryHopsList.join(', ') %></p>
+            <p class="descriptiontext" >yeast = <%= data.yeast.join(' ') %></p>
+        </div>
+        <% %>
         <% } %> 
         <br>   
         <div class="menuflex-container" >

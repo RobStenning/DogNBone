@@ -97,33 +97,28 @@ router.get('/:id', catchAsync(async (req, res, next) => {
         for (let i = 0; i < response.data.hops.length; i++){
             const hop = {
             name: response.data.hops[i].name,
-            use: response.data.hops[i].use
-            };
-            //console.log(hop.name)
-            //console.log(hop.use)
+            use: response.data.hops[i].use,
+            alpha: response.data.hops[i].alpha,
+            amount: response.data.hops[i].amount   
+        };
             hops.push(hop)
         }
+        /*
+        fermentables needs work, odd configuration from BF JSON
+        let malts = [];
         
-        //console.log(hops)
-        /*
-        previous working of hops array before moving to Map
-        let hops = []
-        for (let i = 0; i < response.data.hops.length; i++){
-            hops.push(response.data.hops[i].name)
-        }*/
-        /*
-            for (let i = 0; i < response.data.length; i++){
-        console.log(JSON.stringify(response.data[i].name))
-        if (response.data[i].name === tempNewBeerName){
-            console.log(`${i} matches beer name`)
-            console.log(JSON.stringify(response.data[i]._id))
+        for (let i = 0; i < response.data.fermentables.mashFermentables.length; i++){
+            const malt = {
+            name: response.data.mashFermentables[i].supplier,
+            use: response.data.mashFermentables[i].name   
+        };
+            malts.push(malt)
         }
-    }
         */
         let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name];
-       //let yeast = JSON.stringify(response.data.yeasts[0].laboratory)
         return data = {
             hops: hops,
+            //malts: malts,
             yeast: yeast
         }
     }
