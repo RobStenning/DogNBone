@@ -32,14 +32,18 @@
                     <% } else {%>
                         <% hotSideHops.push(data.hops[i]) %>
                         <% }} %>
-                    <% let dryHopsList = [] %> 
-                    <% let hotSideHopsList = [] %> 
-                    <% for (let i = 0; i < hotSideHops.length; i++){ %>
-                            <% hotSideHopsList.push(hotSideHops[i].name)} %>
-                    <% for (let i = 0; i < dryHops.length; i++){ %>
-                            <% dryHopsList.push(dryHops[i].name)} %>
-                    <% for (let i = 0; i < data.malts.length; i++){ %>
-                             <% malts.push(data.malts[i].name)} %>    
+                <% let dryHopsList = [] %> 
+                <% let hotSideHopsList = [] %> 
+                <% for (let i = 0; i < hotSideHops.length; i++){ %>
+                       <% hotSideHopsList.push(hotSideHops[i].name)} %>
+                <% for (let i = 0; i < dryHops.length; i++){ %>
+                        <% dryHopsList.push(dryHops[i].name)} %>
+                <% let maltsList = [] %> 
+                <% // console.log(data.malts[0]) %> 
+                <%  %>
+                <% for (let i = 0; i < data.malts.length; i++){ %>
+                         <% maltsList.push(data.malts[i].name)} %>
+                <%  %>    
 
         <% %> 
         <p class="title" >Hops</p>
@@ -56,7 +60,7 @@
         <div class="imageblocks" >
             <div>            
                 <ul class="menuflex-container" >
-                    <li class="flex-item" >Malts <%= malts.join(', ')%></li>
+                    <li class="flex-item" >Malts <%= maltsList.join(', ')%></li>
                 </ul>
                 <br>
             </div>

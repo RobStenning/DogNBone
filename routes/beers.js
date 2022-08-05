@@ -103,22 +103,25 @@ router.get('/:id', catchAsync(async (req, res, next) => {
         };
             hops.push(hop)
         }
-        /*
-        fermentables needs work, odd configuration from BF JSON
-        let malts = [];
         
-        for (let i = 0; i < response.data.fermentables.mashFermentables.length; i++){
+        //fermentables needs work, odd configuration from BF JSON
+        let malts = [];
+        //console.log(response.data.data.mashFermentables.length)
+        for (let i = 0; i < response.data.data.mashFermentables.length; i++){
+            console.log(response.data.data.mashFermentables[i].name)
+            console.log(response.data.data.mashFermentables[i].supplier)
             const malt = {
-            name: response.data.mashFermentables[i].supplier,
-            use: response.data.mashFermentables[i].name   
+            name: response.data.data.mashFermentables[i].supplier,
+            use: response.data.data.mashFermentables[i].name   
         };
             malts.push(malt)
+        
         }
-        */
+        
         let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name];
         return data = {
             hops: hops,
-            //malts: malts,
+            malts: malts,
             yeast: yeast
         }
     }
