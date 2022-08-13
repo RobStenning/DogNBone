@@ -15,67 +15,11 @@ const validateBeer = (req, res, next) => {
     } else {
         next();
     }
-}
-let brewFatherBeerId = 'YOX7D8z2Iz8pH1PIdP1Wys9X3gCnSo'
+};
 const username = process.env.brewFatherUName;
 const password = process.env.brewFatherPassword;
-//let session_url = 'https://api.brewfather.app/v1/recipes/vIY6lRqNgvA5tLky59bhDU10P8Wdq0';
-let session_url = 'https://api.brewfather.app/v1/recipes/';
 let token = `${username}:${password}`;
 let encoded = Buffer.from(token).toString('base64');
-
-let axiosConfig = {
-    method: 'get',
-    url: session_url + brewFatherBeerId,
-    headers: { 'Authorization': 'Basic '+ encoded }
-  };
-
-/* API Process
-store BF data, name and ID at new beer or ID stage
-Take bfId
-Get BF data for recipe
-Display data
-
-or
-
-take bfId's
-store data
-update data option?
-show data at show pages
-
-const getBrewFatherData = (req, res) => {
-    axios(axiosConfig)
-    .then(function (response) {
-        console.log(JSON.stringify(response.data.hops[0].name))
-        return data = JSON.stringify(response.data.hops[0].name)
-    }
-    )
-    .catch(function (error) {
-      console.log(error);
-    })
-}
-
-getBrewFatherData();
-router.get('/:id/check', getBrewFatherData, catchAsync(async (req, res, next) => {
-    const beer = await Beer.findById(req.params.id)
-    console.log(beer.id)
-    console.log(beer.bfId);
-}))
-
-
-function getSourBeerData() {
-    axios.get('https://api.brewfather.app/v1/recipes/YOX7D8z2Iz8pH1PIdP1Wys9X3gCnSo')
-  .then(function (response) {
-    // handle success
-    console.log(response);
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-}
-*/
-
 
 router.post('/', isLoggedIn, validateBeer, catchAsync(async (req, res, next) => { 
     const beer = new Beer(req.body.beer)
@@ -96,29 +40,25 @@ router.get('/:id', catchAsync(async (req, res, next) => {
         
         for (let i = 0; i < response.data.hops.length; i++){
             const hop = {
-            name: response.data.hops[i].name,
-            use: response.data.hops[i].use,
-            alpha: response.data.hops[i].alpha,
-            amount: response.data.hops[i].amount   
-        };
+                name: response.data.hops[i].name,
+                use: response.data.hops[i].use,
+                alpha: response.data.hops[i].alpha,
+                amount: response.data.hops[i].amount   
+            };
             hops.push(hop)
-        }
-        
-        //fermentables needs work, odd configuration from BF JSON
-        let malts = [];
-        //console.log(response.data.data.mashFermentables.length)
-        for (let i = 0; i < response.data.data.mashFermentables.length; i++){
-            console.log(response.data.data.mashFermentables[i].name)
-            console.log(response.data.data.mashFermentables[i].supplier)
-            const malt = {
-            name: response.data.data.mashFermentables[i].supplier,
-            use: response.data.data.mashFermentables[i].name   
         };
-            malts.push(malt)
         
-        }
+        let malts = [];
+        for (let i = 0; i < response.data.data.mashFermentables.length; i++){
+            const malt = {
+                supplier: response.data.data.mashFermentables[i].supplier,
+                name: response.data.data.mashFermentables[i].name   
+            };
+            malts.push(malt)
+        };
         
         let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name];
+       
         return data = {
             hops: hops,
             malts: malts,
@@ -130,7 +70,6 @@ router.get('/:id', catchAsync(async (req, res, next) => {
       console.log(error);
       return data = 'error'
     })
-    //console.log(data.hops)
     res.render('beers/info', { beer, data})
 }))
 

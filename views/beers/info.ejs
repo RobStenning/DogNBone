@@ -25,7 +25,6 @@
             <% } else { %> 
                 <% let hotSideHops = [] %>
                 <% let dryHops = [] %>
-                <% let malts = [] %>
                  <% for (let i = 0; i < data.hops.length; i++){ %>
                     <% if (data.hops[i].use === 'Dry Hop'){ %> 
                     <% dryHops.push(data.hops[i]) %>
@@ -38,21 +37,26 @@
                        <% hotSideHopsList.push(hotSideHops[i].name)} %>
                 <% for (let i = 0; i < dryHops.length; i++){ %>
                         <% dryHopsList.push(dryHops[i].name)} %>
-                <% let maltsList = [] %> 
-                <% // console.log(data.malts[0]) %> 
-                <%  %>
+                <% let maltsList = [] %>
                 <% for (let i = 0; i < data.malts.length; i++){ %>
-                         <% maltsList.push(data.malts[i].name)} %>
-                <%  %>    
-
+                         <% maltsList.push(data.malts[i]) %>
+                <% } %>
         <% %> 
         <p class="title" >Hops</p>
         <div class="imageblocks" >
-            <div>            
+            <div>
+                <% if(hotSideHopsList.length > 0){ %> 
+                <p>Bittering / Aroma</p>          
                 <ul class="menuflex-container" >
-                    <li class="flex-item" >Bitter/Aroma <%= hotSideHopsList.join(', ')%></li>
-                    <li class="flex-item" >Dry Hops <%= dryHopsList.join(' ')%></li>
+                    <li class="flex-item" ><%= hotSideHopsList.join(' - ')%></li>
                 </ul>
+                <% } %>
+                <% if(dryHopsList.length > 0){ %>  
+                <p>Dry Hops</p>
+                <ul class="menuflex-container" >
+                    <li class="flex-item" ><%= dryHopsList.join(' - ')%></li>
+                </ul>
+                <% } %>
                 <br>
             </div>
         </div>
@@ -60,7 +64,8 @@
         <div class="imageblocks" >
             <div>            
                 <ul class="menuflex-container" >
-                    <li class="flex-item" >Malts <%= maltsList.join(', ')%></li>
+                    <li class="flex-item" >
+                        <%= maltsList.map(x => x.supplier + ', ' + x.name).join(' - ')%></li>
                 </ul>
                 <br>
             </div>
@@ -69,22 +74,15 @@
         <div class="imageblocks" >
             <div>            
                 <ul class="menuflex-container" >
-                    <li class="flex-item" ><%= data.yeast.join(', ')%></li>
+                    <li class="flex-item" ><%= data.yeast.join(' - ')%></li>
                 </ul>
                 <br>
             </div>
         </div>
-        <div>
-            <p>test area for brewfather data</p>
-            <p class="descriptiontext" >BF Name = <%= beer.bfName%></p>
-            <p class="descriptiontext" >BF ID =<%= beer.bfId%></p>
-            <p class="descriptiontext" >Hot Side Hops =<%= hotSideHopsList.join(', ')%></p>
-            <p class="descriptiontext" >Dry Hops = <%= dryHopsList.join(', ') %></p>
-            <p class="descriptiontext" >yeast = <%= data.yeast.join(' ') %></p>
-        </div>
+
         <% %>
         <% } %> 
-        <br>   
+        <br>
         <div class="menuflex-container" >
             <% if(currentUser) { %> 
             <div class="flex-item">
@@ -96,11 +94,21 @@
             <div class="flex-item">
                 <a class="flex-item" href="/taplist">All Beers</a>
             </div>
+            <div>
+                <p>brewfather data</p>
+                <p class="descriptiontext" >BF Name = <%= beer.bfName%></p>
+                <p class="descriptiontext" >BF ID =<%= beer.bfId%></p>
+            </div>
             <% } else { %> 
             <div class="flex-item">
                 <a class="flex-item" href="/taplist">All Beers</a>
             </div>
             <% } %> 
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
 </main>
