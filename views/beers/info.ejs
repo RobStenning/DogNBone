@@ -42,39 +42,39 @@
                          <% maltsList.push(data.malts[i]) %>
                 <% } %>
         <% %> 
-        <p class="title" >Hops</p>
+        <p class="ingredients" >Hops</p>
         <div class="imageblocks" >
             <div>
                 <% if(hotSideHopsList.length > 0){ %> 
-                <p>Bittering / Aroma</p>          
+                <p class="subtitle" >Bittering / Aroma</p>          
                 <ul class="menuflex-container" >
-                    <li class="flex-item" ><%= hotSideHopsList.join(' - ')%></li>
+                    <li class="ingredients-flex-item" ><%= hotSideHopsList.join(' - ')%></li>
                 </ul>
                 <% } %>
                 <% if(dryHopsList.length > 0){ %>  
-                <p>Dry Hops</p>
+                <p class="subtitle" >Dry Hops</p>
                 <ul class="menuflex-container" >
-                    <li class="flex-item" ><%= dryHopsList.join(' - ')%></li>
+                    <li class="ingredients-flex-item" ><%= dryHopsList.join(' - ')%></li>
                 </ul>
                 <% } %>
                 <br>
             </div>
         </div>
-        <p class="title" >Malts</p>
+        <p class="ingredients" >Malts</p>
         <div class="imageblocks" >
             <div>            
                 <ul class="menuflex-container" >
-                    <li class="flex-item" >
+                    <li class="ingredients-flex-item" >
                         <%= maltsList.map(x => x.supplier + ', ' + x.name).join(' - ')%></li>
                 </ul>
                 <br>
             </div>
         </div>
-        <p class="title" >Yeast</p>
+        <p class="ingredients" >Yeast</p>
         <div class="imageblocks" >
             <div>            
                 <ul class="menuflex-container" >
-                    <li class="flex-item" ><%= data.yeast.join(' - ')%></li>
+                    <li class="ingredients-flex-item" ><%= data.yeast.join(' - ')%></li>
                 </ul>
                 <br>
             </div>

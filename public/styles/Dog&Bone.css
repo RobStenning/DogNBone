@@ -270,6 +270,25 @@ h2{
 	margin: 0 0 0.3rem 0;
   }
 
+.ingredients {
+    text-align: center;
+    font-family: 'Rock Salt', cursive;
+    font-size: 3rem;
+	background: rgba(0, 0, 0, 0.25);
+    padding-top: 75px;
+    padding-bottom: 5px;
+}
+
+.subtitle {
+	text-align: center;
+    font-family: 'Rock Salt', cursive;
+    font-size: 1.5rem;
+}
+.ingredients-flex-item {
+    font-size: 1.25rem;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
 .story {
 	position: relative;
 	padding-top: 3.5em;
