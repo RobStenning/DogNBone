@@ -10,10 +10,10 @@
         <div class="imageblocks" >
             <div>            
                 <ul class="menuflex-container" >
-                    <li class="flex-item" >ABV - <%= beer.abv%></li>
+                    <li class="flex-item" >ABV - <%= beer.abv%>%</li>
                     <li class="flex-item" >STYLE - <%= beer.style%></li>
                     <li class="flex-item" >IBU - <%= beer.ibu%></li>
-                    <li class="flex-item" >DRY HOPS - <%= beer.dryHops%></li>
+                    <li class="flex-item" >DRY HOPS - <%= beer.dryHops%> g/l</li>
                     <li class="flex-item" >STATUS - <%= beer.ontap%></li>
                 </ul>
                 <br>
@@ -45,17 +45,19 @@
         <p class="ingredients" >Hops</p>
         <div class="imageblocks" >
             <div>
-                <% if(hotSideHopsList.length > 0){ %> 
+            <% if(hotSideHopsList.length > 0){ %> 
                 <p class="subtitle" >Bittering / Aroma</p>          
                 <ul class="menuflex-container" >
                     <li class="ingredients-flex-item" ><%= hotSideHopsList.join(' - ')%></li>
                 </ul>
+                <p class="ingredients-flex-item"><%= hotSideHops.map(x => x.amount).reduce((prev, curr) => prev + curr, 0)%>g</p>
                 <% } %>
                 <% if(dryHopsList.length > 0){ %>  
                 <p class="subtitle" >Dry Hops</p>
                 <ul class="menuflex-container" >
                     <li class="ingredients-flex-item" ><%= dryHopsList.join(' - ')%></li>
                 </ul>
+                <p class="ingredients-flex-item"><%= dryHops.map(x => x.amount).reduce((prev, curr) => prev + curr, 0)%>g</p>
                 <% } %>
                 <br>
             </div>
@@ -65,7 +67,7 @@
             <div>            
                 <ul class="menuflex-container" >
                     <li class="ingredients-flex-item" >
-                        <%= maltsList.map(x => x.supplier + ', ' + x.name).join(' - ')%></li>
+                        <%= maltsList.map(x => x.supplier + ', ' + x.name + ` ( ${x.amount} kg )`).join(' - ')%></li>
                 </ul>
                 <br>
             </div>
@@ -83,25 +85,32 @@
         <% %>
         <% } %> 
         <br>
-        <div class="menuflex-container" >
-            <% if(currentUser) { %> 
-            <div class="flex-item">
-            <a id="editButton" href="/beers/<%=beer._id %>/edit">Edit Beer</a>
+        
+            <% if(currentUser) { %>
+            <div class="menuflex-container" > 
+                <div class="flex-item">
+                <a id="editButton" href="/beers/<%=beer._id %>/edit">Edit Beer</a>
+                </div>
+                <form class="flex-item" action="/beers/<%=beer._id%>?_method=DELETE" method="POST" >
+                    <button id="deleteButton" >Delete Beer</button>
+                </form>
+                <div class="flex-item">
+                    <a class="flex-item" href="/taplist">All Beers</a>
+                </div>
             </div>
-            <form class="flex-item" action="/beers/<%=beer._id%>?_method=DELETE" method="POST" >
-                <button id="deleteButton" >Delete Beer</button>
-            </form>
+            <div class="menuflex-container" >
+                <div class="flex-item" >
+                    <br>
+                    <p>brewfather data</p>
+                    <p class="descriptiontext" >BF Name = <%= beer.bfName%></p>
+                    <p class="descriptiontext" >BF ID =<%= beer.bfId%></p>
+                </div>
+            </div>
+            <% } else { %>
+            <div class="menuflex-container" >
             <div class="flex-item">
                 <a class="flex-item" href="/taplist">All Beers</a>
             </div>
-            <div>
-                <p>brewfather data</p>
-                <p class="descriptiontext" >BF Name = <%= beer.bfName%></p>
-                <p class="descriptiontext" >BF ID =<%= beer.bfId%></p>
-            </div>
-            <% } else { %> 
-            <div class="flex-item">
-                <a class="flex-item" href="/taplist">All Beers</a>
             </div>
             <% } %> 
         </div>

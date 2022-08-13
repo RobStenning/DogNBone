@@ -52,7 +52,8 @@ router.get('/:id', catchAsync(async (req, res, next) => {
         for (let i = 0; i < response.data.data.mashFermentables.length; i++){
             const malt = {
                 supplier: response.data.data.mashFermentables[i].supplier,
-                name: response.data.data.mashFermentables[i].name   
+                name: response.data.data.mashFermentables[i].name,
+                amount: response.data.data.mashFermentables[i].amount
             };
             malts.push(malt)
         };
