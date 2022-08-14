@@ -27,7 +27,7 @@
                 <h1>Pouring Now</h1>
                 <% for (let beer of beers) {%>
                     <% if (beer.ontap === 'pouring') { %>
-                        <h2>- <%= beer.name %> - <%= beer.abv %> - <%= beer.style %> -</h2>
+                        <h2>- <%= beer.name %> - <%= beer.abv %>% - <%= beer.style %> -</h2>
                         <p class="beerdescription"><%= beer.previewDescription %></p>
                    <% } %>
                 <%} %>

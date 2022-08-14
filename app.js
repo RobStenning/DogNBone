@@ -64,7 +64,6 @@ const sessionConfig = {
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        //secure: true,
         expires: Date.now() + 1000 * 60 * 60 ^ 24 * 7,
         maxAge: 1000 * 60 * 60 ^ 24 * 7
     }
@@ -111,46 +110,6 @@ app.get('/previousbeers', catchAsync(async (req, res, next) => {
 
 app.get('/new', isLoggedIn, (req, res) => {
     res.render('beers/new');
-})
-
-const username = process.env.brewFatherUName;
-const password = process.env.brewFatherPassword;
-//let session_url = 'https://api.brewfather.app/v1/recipes/vIY6lRqNgvA5tLky59bhDU10P8Wdq0';
-let session_url = 'https://api.brewfather.app/v1/recipes';
-let token = `${username}:${password}`;
-let encoded = Buffer.from(token).toString('base64');
-
-let axiosConfig = {
-    method: 'get',
-    url: session_url,
-    headers: { 'Authorization': 'Basic '+ encoded }
-  };
-
-let tempNewBeerName = 'PAW v3'
-
-app.get('/recipe', (req, res) => {
-   axios(axiosConfig)
-  .then(function (response) {
-    for (let i = 0; i < response.data.length; i++){
-        console.log(JSON.stringify(response.data[i].name))
-        if (response.data[i].name === tempNewBeerName){
-            console.log(`${i} matches beer name`)
-            console.log(JSON.stringify(response.data[i]._id))
-        }
-    }
-    /*
-    console.log(JSON.stringify(response.data.carbonation));
-    console.log(JSON.stringify(response.data.hops[0].name));
-    console.log(JSON.stringify(response.data.hops[1].name));
-    console.log(JSON.stringify(response.data.hops[2].name));
-    console.log(JSON.stringify(response.data.hops[3].name));
-    console.log(JSON.stringify(response.data.hops[4].name));
-    console.log(JSON.stringify(response.data.hops.length));*/
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-    res.render('beers/recipe');
 })
 
 app.use('/beers', beerRoutes)
