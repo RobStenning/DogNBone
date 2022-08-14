@@ -5,6 +5,7 @@ const { beerSchema } = require('../validateSchemas/schemas.js');
 const { isLoggedIn } = require('../tools/middleware')
 const ExpressError = require('../tools/ExpressError');
 const Beer = require('../models/beers');
+const axios = require('axios');
 
 const validateBeer = (req, res, next) => {
     const { error } = beerSchema.validate(req.body);
@@ -14,7 +15,11 @@ const validateBeer = (req, res, next) => {
     } else {
         next();
     }
-}
+};
+const username = process.env.brewFatherUName;
+const password = process.env.brewFatherPassword;
+let token = `${username}:${password}`;
+let encoded = Buffer.from(token).toString('base64');
 
 router.post('/', isLoggedIn, validateBeer, catchAsync(async (req, res, next) => { 
     const beer = new Beer(req.body.beer)
@@ -25,7 +30,48 @@ router.post('/', isLoggedIn, validateBeer, catchAsync(async (req, res, next) => 
 
 router.get('/:id', catchAsync(async (req, res, next) => {
     const beer = await Beer.findById(req.params.id)
-    res.render('beers/info', { beer })
+        await axios({
+        method: 'get',
+        url: 'https://api.brewfather.app/v1/recipes/' + beer.bfId,
+        headers: { 'Authorization': 'Basic '+ encoded }
+    })
+    .then(function (response) {
+        let hops = [];
+        
+        for (let i = 0; i < response.data.hops.length; i++){
+            const hop = {
+                name: response.data.hops[i].name,
+                use: response.data.hops[i].use,
+                alpha: response.data.hops[i].alpha,
+                amount: response.data.hops[i].amount   
+            };
+            hops.push(hop)
+        };
+        
+        let malts = [];
+        for (let i = 0; i < response.data.data.mashFermentables.length; i++){
+            const malt = {
+                supplier: response.data.data.mashFermentables[i].supplier,
+                name: response.data.data.mashFermentables[i].name,
+                amount: response.data.data.mashFermentables[i].amount
+            };
+            malts.push(malt)
+        };
+        
+        let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name];
+       
+        return data = {
+            hops: hops,
+            malts: malts,
+            yeast: yeast
+        }
+    }
+    )
+    .catch(function (error) {
+      console.log(error);
+      return data = 'error'
+    })
+    res.render('beers/info', { beer, data})
 }))
 
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res, next) => {

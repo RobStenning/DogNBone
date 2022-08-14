@@ -9,9 +9,7 @@
         </div>
     <% if (displayOntap) {%>
 		<p class="title" id="ontap" >~ On Tap ~</p>
-		<% } else { %>
-			<% console.log(`pouring not found`)%>
-		<%}%>
+		<% } %>
 		<% beers.sort(function(a, b){return a.tapNo - b.tapNo}) %> 
         <% for (let beer of beers) {%>
 			<%if(beer.ontap === 'pouring') {%>
@@ -34,9 +32,7 @@
 	<%}}%>
 	<% if (displayBottled) {%>
 		<p class="title">~ Bottled ~</p>
-		<% } else { %>
-			<% console.log(`bottled not found`)%>
-		<%}%>
+		<% } %>
 		<% for (let beer of beers) {%>
 			<%if(beer.ontap === 'bottled') {%>
 			<div class="imageblocks">
@@ -58,9 +54,7 @@
 	<%}}%>		
 	<% if (displayIncoming) {%>
 		<p class="title">~ Incoming ~</p>
-		<% } else { %>
-			<% console.log(`kegged not found`)%>
-		<%}%>
+		<% } %>
 	<% for (let beer of beers) {%>
 		<%if(beer.ontap === 'kegged') {%>
 		<div class="imageblocks">
@@ -84,9 +78,7 @@
 	<h1 class="beertitle">
 		<a href="/previousbeers">~ see previous beers ~</a>
 	</h1>
-	<% } else { %>
-		<% console.log(`previous not found`)%>
-	<%}%>
+	<% } %>
 	</div>
 	<br>
 	<br>

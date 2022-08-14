@@ -21,6 +21,8 @@ const beerRoutes = require('./routes/beers');
 const userRoute = require('./routes/users');
 const mongoSanitize = require('express-mongo-sanitize');
 const db = mongoose.connection;
+const axios = require('axios');
+
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/dog-and-bone';
 mongoose.connect(dbUrl);
@@ -62,7 +64,6 @@ const sessionConfig = {
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        //secure: true,
         expires: Date.now() + 1000 * 60 * 60 ^ 24 * 7,
         maxAge: 1000 * 60 * 60 ^ 24 * 7
     }
@@ -111,9 +112,8 @@ app.get('/new', isLoggedIn, (req, res) => {
     res.render('beers/new');
 })
 
-
-
 app.use('/beers', beerRoutes)
+
 
 app.get('/login', (req, res) =>{
     res.render('login');
