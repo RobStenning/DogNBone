@@ -92,4 +92,9 @@ router.delete('/:id', isLoggedIn, catchAsync(async (req, res, next) => {
     res.redirect('/taplist')
 }))
 
+router.get('/:id/test', catchAsync(async (req, res, next) => {
+    console.log(`${username} & ${password}`)
+    console.log(encoded)
+}))
+
 module.exports = router;
