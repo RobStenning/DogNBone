@@ -13,7 +13,7 @@ the website can be seen here [dogandbonebeerco.co.uk](http://www.dogandbonebeerc
 
 Here is a GIF showing the admin features used to add and edit beers
 
-<img src="DNB.gif?raw=true" width="200px">
+<img src="DNB.gif?raw=true">
 
 - August Update - Brewfather API - 
 
