@@ -14,3 +14,15 @@ the website can be seen here [dogandbonebeerco.co.uk](http://www.dogandbonebeerc
 Here is a GIF showing the admin features used to add and edit beers
 
 <img src="DNB.gif?raw=true" width="200px">
+
+- August Update - Brewfather API - 
+
+Each beer info page now displays data taken from the Brewfather API, recipes are built using the app and data is then displayed on the info pages. Key info like hop amounts and useage is displayed and simple calculations add up the amouts for each hop phase. Malts are also listed showing the type, supplier  along with the amounts. Finally the yeast supplier and strain is displayed.
+
+I used postman to initially get the data from brewfather and then slowly built the route requests within the app. 
+
+- Considerations - 
+
+The API limits calls to 150 per hour, currently each time a page is displayed a request is made. This could potentially cause a 429 - Too Many Requests Error should too many people be viewing the site at one time. When developing this feature I did consider storing the data from requests in to my own database with a feature to fetch and update the ingredients as a manual process, however I decided against this to ensure the data was always upto date.
+
+For futher development I could get the app to pull data on a daily basis to avoid too many request errors whilst ensuring the data is still relatively new. Realistically once a recipe has been made it is unlikely to be changed that often.
