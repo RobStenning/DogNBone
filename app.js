@@ -114,14 +114,12 @@ app.get('/new', isLoggedIn, (req, res) => {
 
 app.use('/beers', beerRoutes)
 
+app.get('/robtoberfest', (req, res) =>{
+    res.render('robtoberfest');
+})
 
 app.get('/login', (req, res) =>{
     res.render('login');
-})
-
-
-app.get('/robtoberfest', (req, res) =>{
-    res.render('robtoberfest');
 })
 
 app.get('/logout', (req, res) => {
