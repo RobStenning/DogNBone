@@ -6,6 +6,8 @@ html * {
 	margin: 0;
 	padding: 0;
 	scroll-behavior: smooth;
+	background-color: #000000;
+	background-size: cover;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -349,4 +351,34 @@ h2{
 .footerlogo{
 	height: 2.5em;
 	float: right;
+}
+
+h1.robtoberfest {
+	font-family: 'Germania One', cursive;
+	font-size: 5rem;	
+}
+h3.robtoberfest {
+	font-family: 'Germania One', cursive;
+	font-size: 2rem;	
+}
+p.robtoberfest {
+	font-family: 'Germania One', cursive;
+	font-size: 2rem;	
+}
+
+.centre {
+	margin-top: 35px;
+	padding-top: 20px;
+	text-align: center;
+	justify-content: center;
+	
+}
+
+.squareimageCrop {
+	margin-top: 5rem;
+	margin-bottom: 30rem;
+	height: 20rem;
+	width: 20rem;
+	object-fit: cover;
+	object-position: 0% 60%;
 }

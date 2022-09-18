@@ -119,6 +119,11 @@ app.get('/login', (req, res) =>{
     res.render('login');
 })
 
+
+app.get('/robtoberfest', (req, res) =>{
+    res.render('robtoberfest');
+})
+
 app.get('/logout', (req, res) => {
     req.logout(function(err) {
         if (err) {return next(err)}
