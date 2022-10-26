@@ -58,7 +58,7 @@ router.get('/:id', catchAsync(async (req, res, next) => {
             malts.push(malt)
         };
         
-        let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name];
+        let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name, response.data.yeasts[0].description];
        
         return data = {
             hops: hops,
