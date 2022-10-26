@@ -13,7 +13,9 @@
                     <li class="flex-item" >ABV - <%= beer.abv%>%</li>
                     <li class="flex-item" >STYLE - <%= beer.style%></li>
                     <li class="flex-item" >IBU - <%= beer.ibu%></li>
+                    <% if(beer.dryHops > 0) { %> 
                     <li class="flex-item" >DRY HOPS - <%= beer.dryHops%> g/l</li>
+                    <% } %> 
                     <li class="flex-item" >STATUS - <%= beer.ontap%></li>
                 </ul>
                 <br>
@@ -67,7 +69,16 @@
             <div>            
                 <ul class="menuflex-container" >
                     <li class="ingredients-flex-item" >
-                        <%= maltsList.map(x => x.supplier + ', ' + x.name + ` ( ${x.amount} kg )`).join(' - ')%></li>
+                        <% let mainMalts = maltsList.filter(function(malt){ %>
+                        <% return malt.amount >= 1; %>
+                        <% }) %>
+                        <% let minorMalts = maltsList.filter(function(malt){ %>
+                        <% return malt.amount < 1; %>
+                        <% }) %>
+                        <%= mainMalts.map(x => x.supplier + ' - ' + x.name + ` ( ${x.amount} kg )`).join(' | ')%>
+                        <%= minorMalts.map(x => x.supplier + ' - ' + x.name + ` ( ${(x.amount * 1000)} g )`).join(' | ')%>
+                        
+                    </li>
                 </ul>
                 <br>
             </div>

@@ -25,6 +25,7 @@
                 <img class="squareimage" src="https://live.staticflickr.com/65535/51040316371_d43d7f8626_o.jpg" alt="">
             <div>
                 <h1>Pouring Now</h1>
+                <% beers.sort(function(a, b){return a.tapNo - b.tapNo}) %>
                 <% for (let beer of beers) {%>
                     <% if (beer.ontap === 'pouring') { %>
                         <h2>- <%= beer.name %> - <%= beer.abv %>% - <%= beer.style %> -</h2>

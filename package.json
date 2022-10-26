@@ -1,14 +1,15 @@
 {
   "name": "dog-n-bone",
   "version": "1.0.0",
-  "description": "",
+  "description": "The Dog & Bone website displays information about how it all started as well as listing the current beers on tap and the back catalouge.",
   "main": "app.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "start:dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "method-override": "^3.0.0",
     "mongoose": "^6.4.6",
     "node-fetch": "^3.2.8",
+    "nodemon": "^2.0.20",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^7.1.2",
