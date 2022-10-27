@@ -6,6 +6,7 @@ const { isLoggedIn } = require('../tools/middleware')
 const ExpressError = require('../tools/ExpressError');
 const Beer = require('../models/beers');
 const axios = require('axios');
+const { date } = require('joi');
 
 const validateBeer = (req, res, next) => {
     const { error } = beerSchema.validate(req.body);
@@ -59,11 +60,14 @@ router.get('/:id', catchAsync(async (req, res, next) => {
         };
         
         let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name, response.data.yeasts[0].description];
-       
+        let created = [response.data._created._seconds]
+        const fullDate = new Date(created * 1000);
+        const timeStamp = fullDate.toISOString().slice(0, 7);
         return data = {
             hops: hops,
             malts: malts,
-            yeast: yeast
+            yeast: yeast,
+            timeStamp: timeStamp
         }
     }
     )
@@ -95,6 +99,9 @@ router.delete('/:id', isLoggedIn, catchAsync(async (req, res, next) => {
 router.get('/:id/test', catchAsync(async (req, res, next) => {
     console.log(`${username} & ${password}`)
     console.log(encoded)
+    dateConverter(1634480404)
+    
+    
 }))
 
 module.exports = router;
