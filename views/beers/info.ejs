@@ -6,15 +6,20 @@
             <p class="new-beer"><%= success %></p>
             </div>
         </div>
-        <p class="title" ><%= beer.name %></p>
+        <p class="title" ><%= beer.name %></p> 
         <div class="imageblocks" >
             <div>            
                 <ul class="menuflex-container" >
                     <li class="flex-item" >ABV - <%= beer.abv%>%</li>
                     <li class="flex-item" >STYLE - <%= beer.style%></li>
-                    <li class="flex-item" >IBU - <%= beer.ibu%></li>
+                    <li class="flex-item" >IBU - <%= beer.ibu%></li>         
+                    <% if(beer.dryHops > 0) { %> 
                     <li class="flex-item" >DRY HOPS - <%= beer.dryHops%> g/l</li>
+                    <% } %> 
                     <li class="flex-item" >STATUS - <%= beer.ontap%></li>
+                    <% if (data !== 'error'){ %> 
+                    <li class="flex-item" >BREWED - <%= data.timeStamp%></li>
+                    <% } %> 
                 </ul>
                 <br>
                 <p class="descriptiontext" ><%= beer.description%></p>
@@ -67,7 +72,16 @@
             <div>            
                 <ul class="menuflex-container" >
                     <li class="ingredients-flex-item" >
-                        <%= maltsList.map(x => x.supplier + ', ' + x.name + ` ( ${x.amount} kg )`).join(' - ')%></li>
+                        <% let mainMalts = maltsList.filter(function(malt){ %>
+                        <% return malt.amount >= 1; %>
+                        <% }) %>
+                        <% let minorMalts = maltsList.filter(function(malt){ %>
+                        <% return malt.amount < 1; %>
+                        <% }) %>
+                        <%= mainMalts.map(x => x.supplier + ' - ' + x.name + ` ( ${x.amount} kg )`).join(' | ')%>
+                        <%= minorMalts.map(x => x.supplier + ' - ' + x.name + ` ( ${(x.amount * 1000)} g )`).join(' | ')%>
+                        
+                    </li>
                 </ul>
                 <br>
             </div>
@@ -76,9 +90,14 @@
         <div class="imageblocks" >
             <div>            
                 <ul class="menuflex-container" >
-                    <li class="ingredients-flex-item" ><%= data.yeast.join(' - ')%></li>
+                    <li class="ingredients-flex-item" ><%= data.yeast[0] + ' - ' + data.yeast[1]%></li>
                 </ul>
                 <br>
+                <div class="menuflex-container">
+                    <div class="ingredients-flex-item">
+                    <%= data.yeast[2]%> 
+                    </div>
+                </div>
             </div>
         </div>
 

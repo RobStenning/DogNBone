@@ -25,6 +25,7 @@ const axios = require('axios');
 
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/dog-and-bone';
+//const dbUrl = process.env.DB_URL || 'mongodb://mongo:27017/dog-and-bone';
 mongoose.connect(dbUrl);
 
 db.on("error", console.error.bind(console, "connection error:"));
@@ -114,14 +115,12 @@ app.get('/new', isLoggedIn, (req, res) => {
 
 app.use('/beers', beerRoutes)
 
+app.get('/robtoberfest', (req, res) =>{
+    res.render('robtoberfest');
+})
 
 app.get('/login', (req, res) =>{
     res.render('login');
-})
-
-
-app.get('/robtoberfest', (req, res) =>{
-    res.render('robtoberfest');
 })
 
 app.get('/logout', (req, res) => {
