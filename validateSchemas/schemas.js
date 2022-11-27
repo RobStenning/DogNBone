@@ -35,6 +35,6 @@ module.exports.beerSchema = Joi.object({
         dryHops: Joi.number().required().min(0),
         previewDescription: Joi.string().required().escapeHTML(),
         description: Joi.string().required().escapeHTML(),
-        ontap: Joi.string().required().escapeHTML(),
+        ontap: Joi.string().required().escapeHTML()
     }).required()
 });

@@ -22,6 +22,8 @@ const userRoute = require('./routes/users');
 const mongoSanitize = require('express-mongo-sanitize');
 const db = mongoose.connection;
 const axios = require('axios');
+const beers = require('./models/beers');
+const res = require('express/lib/response');
 
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/dog-and-bone';
@@ -117,6 +119,42 @@ app.use('/beers', beerRoutes)
 
 app.get('/robtoberfest', (req, res) =>{
     res.render('robtoberfest');
+})
+
+
+const username = process.env.brewFatherUName;
+const password = process.env.brewFatherPassword;
+let token = `${username}:${password}`;
+let encoded = Buffer.from(token).toString('base64');
+
+async function updateData() {
+    const beer = await Beer.findOne({})
+    await axios({
+        method: 'get',
+        url: 'https://api.brewfather.app/v1/recipes/' + beer.bfId,
+        headers: { 'Authorization': 'Basic '+ encoded }
+    })
+    .then(function (response) {
+        let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name, response.data.yeasts[0].description];
+        return data = {
+            yeast: yeast
+        }
+    }
+    )
+    .catch(function (error) {
+      //console.log(error);
+      return data = 'error'
+    })
+    //const update = { yeast: data.yeast[0]}
+    console.log(beer.name)
+    console.log(`data.yeast = ${data.yeast[0]}, ${data.yeast[1]}, ${data.yeast[2]}`)
+    const update = await Beer.findByIdAndUpdate({"_id": `${beer.id}`}, {"yeast": `${data.yeast}`})
+    
+}
+
+app.get('/update', (req, res) => {
+    console.log("running update")
+    updateData()
 })
 
 app.get('/login', (req, res) =>{
