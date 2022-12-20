@@ -24,6 +24,7 @@ const db = mongoose.connection;
 const axios = require('axios');
 const beers = require('./models/beers');
 const res = require('express/lib/response');
+const { updateMany } = require('./models/user');
 
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/dog-and-bone';
@@ -128,16 +129,28 @@ let token = `${username}:${password}`;
 let encoded = Buffer.from(token).toString('base64');
 
 async function updateData() {
-    const beer = await Beer.findOne({})
+    console.log('start')
+    //for(let i=0; i<5; i++){
+    //const beer = await Beer.findOne({}, {name: 1})
+    //console.log(beer.name)
+    //}
+    //const beer = await Beer.updateMany({}, { yeast: "updated"})
+    //await beer.save()
+    
     await axios({
         method: 'get',
-        url: 'https://api.brewfather.app/v1/recipes/' + beer.bfId,
+        url: 'https://api.brewfather.app/v1/recipes/',
         headers: { 'Authorization': 'Basic '+ encoded }
     })
     .then(function (response) {
-        let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name, response.data.yeasts[0].description];
+        //let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name, response.data.yeasts[0].description];
+        let allBeers = []
+        for(let i=0; i<response.data.length; i++){
+            allBeers.push(response.data[i]._id)
+        }
         return data = {
-            yeast: yeast
+            allBeers: allBeers
+            //yeast: yeast
         }
     }
     )
@@ -145,10 +158,13 @@ async function updateData() {
       //console.log(error);
       return data = 'error'
     })
+    
     //const update = { yeast: data.yeast[0]}
-    console.log(beer.name)
-    console.log(`data.yeast = ${data.yeast[0]}, ${data.yeast[1]}, ${data.yeast[2]}`)
-    const update = await Beer.findByIdAndUpdate({"_id": `${beer.id}`}, {"yeast": `${data.yeast}`})
+    //console.log(Beer.count({}))
+    //console.log(`data.yeast = ${data.yeast[0]}, ${data.yeast[1]}, ${data.yeast[2]}`)
+    //const update = await Beer.findByIdAndUpdate({"_id": `${beer.id}`}, {"yeast": `${data.yeast}`})
+    console.log(data)
+    console.log('end')
     
 }
 
