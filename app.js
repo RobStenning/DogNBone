@@ -128,49 +128,63 @@ const password = process.env.brewFatherPassword;
 let token = `${username}:${password}`;
 let encoded = Buffer.from(token).toString('base64');
 
-async function updateData() {
+async function getBeerData() {
     console.log('start')
-    //for(let i=0; i<5; i++){
-    //const beer = await Beer.findOne({}, {name: 1})
-    //console.log(beer.name)
-    //}
-    //const beer = await Beer.updateMany({}, { yeast: "updated"})
-    //await beer.save()
-    
     await axios({
         method: 'get',
         url: 'https://api.brewfather.app/v1/recipes/',
         headers: { 'Authorization': 'Basic '+ encoded }
     })
     .then(function (response) {
-        //let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name, response.data.yeasts[0].description];
         let allBeers = []
         for(let i=0; i<response.data.length; i++){
             allBeers.push(response.data[i]._id)
         }
         return data = {
-            allBeers: allBeers
-            //yeast: yeast
+            allBeers: allBeers,
         }
-    }
-    )
+    })
     .catch(function (error) {
-      //console.log(error);
       return data = 'error'
     })
-    
+    //const beer = await Beer.findOne({}, {name: 1})
+    //const beer = await Beer.updateMany({}, { yeast: "updated"})
+    //await beer.save()
     //const update = { yeast: data.yeast[0]}
     //console.log(Beer.count({}))
     //console.log(`data.yeast = ${data.yeast[0]}, ${data.yeast[1]}, ${data.yeast[2]}`)
     //const update = await Beer.findByIdAndUpdate({"_id": `${beer.id}`}, {"yeast": `${data.yeast}`})
-    console.log(data)
+    console.log(data.allBeers)
+    let totalBeers = data.allBeers.length
+    let beerIds = [...data.allBeers]
     console.log('end')
-    
+//testing - taking first beer and taking data
+
+for (let i=0; i<totalBeers; i++){
+    await axios({
+        method: 'get',
+        url: 'https://api.brewfather.app/v1/recipes/' + beerIds[i],
+        headers: { 'Authorization': 'Basic '+ encoded }
+    })
+    .then(function (response) {
+        let name = [response.data.name]
+        return data = {
+            name: name,
+        }
+    })
+    .catch(function (error) {
+      //console.log(error);
+      return data = 'error'
+    })
+    console.log(data.name[0])
+    const update = await Beer.findByIdAndUpdate({"_id": `${beer.id}`}, {"yeast": `${data.yeast}`})
+}
 }
 
 app.get('/update', (req, res) => {
     console.log("running update")
-    updateData()
+    getBeerData()
+
 })
 
 app.get('/login', (req, res) =>{
