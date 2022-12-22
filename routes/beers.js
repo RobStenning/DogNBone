@@ -59,11 +59,13 @@ router.get('/:id', catchAsync(async (req, res, next) => {
         };
         
         let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name];
-       
+        let brewedDate = [response.data._created._seconds];
+        
         return data = {
             hops: hops,
             malts: malts,
-            yeast: yeast
+            yeast: yeast,
+            brewedDate: brewedDate
         }
     }
     )
@@ -72,6 +74,7 @@ router.get('/:id', catchAsync(async (req, res, next) => {
       return data = 'error'
     })
     res.render('beers/info', { beer, data})
+    console.log(data.brewedDate)
 }))
 
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res, next) => {

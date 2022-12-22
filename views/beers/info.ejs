@@ -17,9 +17,9 @@
                     <li class="flex-item" >DRY HOPS - <%= beer.dryHops.toFixed(1)%> g/l</li>
                     <% } %> 
                     <li class="flex-item" >STATUS - <%= beer.ontap%></li>
-                    <% if (data !== 'error'){ %> 
-                    <li class="flex-item" >BREWED - <%= data.timeStamp%></li>
-                    <% } %> 
+                    <% let date = new Date(beer.brewedDate * 1000)%>
+                    <% console.log(beer.brewedDate * 1000) %>
+                    <li class="flex-item" >BREWED - <%= date.toUTCString().slice(8, 16)%></li>
                 </ul>
                 <br>
                 <p class="descriptiontext" ><%= beer.description%></p>

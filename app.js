@@ -174,6 +174,7 @@ async function getBeerData() {
         let ibu = response.data.ibu
         let dryHops = response.data.sumDryHopPerLiter
         let yeast = response.data.yeasts[0].name
+        let brewedDate = response.data._created._seconds
         return data = {
             bfName: bfName,
             abv: abv,
@@ -181,15 +182,17 @@ async function getBeerData() {
             ibu: ibu,
             dryHops: dryHops,
             yeast: yeast,
+            brewedDate: brewedDate
         }
         })
         .catch(function (error) {
       //console.log(error);
         return data = 'error'
         })
-        console.log(data.bfName[0])
-        console.log(data.style)
+        //console.log(data.bfName[0])
+        //console.log(data.style)
         //const beer = await Beer.findByIdAndUpdate(id, { ...req.body.beer })
+        console.log(data.brewedDate)
         let query = { bfId: `${bfBeerIds[i]}` }
         let replace = { $set: 
             { 
@@ -198,10 +201,11 @@ async function getBeerData() {
                 style: `${data.style}`, 
                 ibu: `${data.ibu}`, 
                 dryHops: `${data.dryHops}`, 
-                yeast: `${data.yeast}`, 
+                yeast: `${data.yeast}`,
+                brewedDate: `${data.brewedDate}`
             }}
         const update = await Beer.findOneAndUpdate(query, replace)
-        console.log(update)
+        //console.log(update)
     }
 }
 
