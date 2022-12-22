@@ -132,6 +132,7 @@ async function getBeerData() {
     await axios({
         method: 'get',
         url: 'https://api.brewfather.app/v1/recipes/',
+        params: { 'limit': '50' },
         headers: { 'Authorization': 'Basic '+ encoded }
     })
     .then(function (response) {
@@ -155,6 +156,7 @@ async function getBeerData() {
     //const update = await Beer.findByIdAndUpdate({"_id": `${beer.id}`}, {"yeast": `${data.yeast}`})
     console.log('allBrewFatherBeers')
     console.log(data.allBFBeers)
+    console.log(data.allBFBeers.length)
     let totalBFBeers = data.allBFBeers.length
     let bfBeerIds = [...data.allBFBeers]
     //testing - taking first beer and taking data
