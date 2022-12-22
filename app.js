@@ -129,19 +129,18 @@ let token = `${username}:${password}`;
 let encoded = Buffer.from(token).toString('base64');
 
 async function getBeerData() {
-    console.log('start')
     await axios({
         method: 'get',
         url: 'https://api.brewfather.app/v1/recipes/',
         headers: { 'Authorization': 'Basic '+ encoded }
     })
     .then(function (response) {
-        let allBeers = []
+        let allBFBeers = []
         for(let i=0; i<response.data.length; i++){
-            allBeers.push(response.data[i]._id)
+            allBFBeers.push(response.data[i]._id)
         }
         return data = {
-            allBeers: allBeers,
+            allBFBeers: allBFBeers,
         }
     })
     .catch(function (error) {
@@ -154,31 +153,54 @@ async function getBeerData() {
     //console.log(Beer.count({}))
     //console.log(`data.yeast = ${data.yeast[0]}, ${data.yeast[1]}, ${data.yeast[2]}`)
     //const update = await Beer.findByIdAndUpdate({"_id": `${beer.id}`}, {"yeast": `${data.yeast}`})
-    console.log(data.allBeers)
-    let totalBeers = data.allBeers.length
-    let beerIds = [...data.allBeers]
-    console.log('end')
-//testing - taking first beer and taking data
-
-for (let i=0; i<totalBeers; i++){
-    await axios({
-        method: 'get',
-        url: 'https://api.brewfather.app/v1/recipes/' + beerIds[i],
-        headers: { 'Authorization': 'Basic '+ encoded }
-    })
-    .then(function (response) {
-        let name = [response.data.name]
+    console.log('allBrewFatherBeers')
+    console.log(data.allBFBeers)
+    let totalBFBeers = data.allBFBeers.length
+    let bfBeerIds = [...data.allBFBeers]
+    //testing - taking first beer and taking data
+    console.log('start of recipe by id')
+    for (let i=0; i<totalBFBeers; i++){
+        await axios({
+            method: 'get',
+            url: 'https://api.brewfather.app/v1/recipes/' + bfBeerIds[i],
+            headers: { 'Authorization': 'Basic '+ encoded }
+        })
+        .then(function (response) {
+        let bfName = [response.data.name]
+        let abv = response.data.abv
+        let style = response.data.style.name
+        let ibu = response.data.ibu
+        let dryHops = response.data.sumDryHopPerLiter
+        let yeast = response.data.yeasts[0].name
         return data = {
-            name: name,
+            bfName: bfName,
+            abv: abv,
+            style: style,
+            ibu: ibu,
+            dryHops: dryHops,
+            yeast: yeast,
         }
-    })
-    .catch(function (error) {
+        })
+        .catch(function (error) {
       //console.log(error);
-      return data = 'error'
-    })
-    console.log(data.name[0])
-    const update = await Beer.findByIdAndUpdate({"_id": `${beer.id}`}, {"yeast": `${data.yeast}`})
-}
+        return data = 'error'
+        })
+        console.log(data.bfName[0])
+        console.log(data.style)
+        //const beer = await Beer.findByIdAndUpdate(id, { ...req.body.beer })
+        let query = { bfId: `${bfBeerIds[i]}` }
+        let replace = { $set: 
+            { 
+                bfName: `${data.bfName}`,
+                abv: `${data.abv}`,
+                style: `${data.style}`, 
+                ibu: `${data.ibu}`, 
+                dryHops: `${data.dryHops}`, 
+                yeast: `${data.yeast}`, 
+            }}
+        const update = await Beer.findOneAndUpdate(query, replace)
+        console.log(update)
+    }
 }
 
 app.get('/update', (req, res) => {

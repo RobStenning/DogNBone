@@ -6,8 +6,6 @@ const { isLoggedIn } = require('../tools/middleware')
 const ExpressError = require('../tools/ExpressError');
 const Beer = require('../models/beers');
 const axios = require('axios');
-const { date } = require('joi');
-const { append } = require('express/lib/response');
 
 const validateBeer = (req, res, next) => {
     const { error } = beerSchema.validate(req.body);
@@ -32,7 +30,7 @@ router.post('/', isLoggedIn, validateBeer, catchAsync(async (req, res, next) => 
 
 router.get('/:id', catchAsync(async (req, res, next) => {
     const beer = await Beer.findById(req.params.id)
-    await axios({
+        await axios({
         method: 'get',
         url: 'https://api.brewfather.app/v1/recipes/' + beer.bfId,
         headers: { 'Authorization': 'Basic '+ encoded }
@@ -60,15 +58,12 @@ router.get('/:id', catchAsync(async (req, res, next) => {
             malts.push(malt)
         };
         
-        let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name, response.data.yeasts[0].description];
-        let created = [response.data._created._seconds]
-        const fullDate = new Date(created * 1000);
-        const timeStamp = fullDate.toISOString().slice(0, 7);
+        let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name];
+       
         return data = {
             hops: hops,
             malts: malts,
-            yeast: yeast,
-            timeStamp: timeStamp
+            yeast: yeast
         }
     }
     )
@@ -86,32 +81,7 @@ router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res, next) => {
 
 router.put('/:id', validateBeer, catchAsync( async (req, res, next) => {
     const { id } = req.params
-    const beerId = await Beer.findById(req.params.id)
-    const bfId = req.body[0]
-    console.log(`bfID = ${bfId}`)
-    console.log(`ID = ${id}`)
-    await axios({
-        method: 'get',
-        url: 'https://api.brewfather.app/v1/recipes/' + id.bfId,
-        headers: { 'Authorization': 'Basic '+ encoded }
-    })
-    .then(function (response) {
-        let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name, response.data.yeasts[0].description];
-        return data = {
-            yeast: yeast
-        }
-    }
-    )
-    .catch(function (error) {
-      //console.log(error);
-      return data = 'error'
-    })
-    //const update = { yeast: data.yeast[0]}
-    console.log(`data.yeast = ${data.yeast}`)
-    
-    //const beer = await Beer.findByIdAndUpdate(id, { ...req.body.beer })
-    
-    const beer = await Beer.findByIdAndUpdate(id, {yeast: "testing"})
+    const beer = await Beer.findByIdAndUpdate(id, { ...req.body.beer })
     res.redirect(`/beers/${beer._id}`)
 }))
 
@@ -120,16 +90,6 @@ router.delete('/:id', isLoggedIn, catchAsync(async (req, res, next) => {
     await Beer.findByIdAndDelete(id)
     req.flash('deleted', 'Beer Deleted')
     res.redirect('/taplist')
-}))
-
-
-
-router.get('/:id/test', catchAsync(async (req, res, next) => {
-    //console.log(`${username} & ${password}`)
-    //console.log(encoded)
-    //dateConverter(1634480404)
-
-    
 }))
 
 module.exports = router;
