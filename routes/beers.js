@@ -74,7 +74,6 @@ router.get('/:id', catchAsync(async (req, res, next) => {
       return data = 'error'
     })
     res.render('beers/info', { beer, data})
-    console.log(data.brewedDate)
 }))
 
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res, next) => {

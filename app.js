@@ -173,7 +173,7 @@ async function getBeerData() {
         let style = response.data.style.name
         let ibu = response.data.ibu
         let dryHops = response.data.sumDryHopPerLiter
-        let yeast = response.data.yeasts[0].name
+        let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name]
         let brewedDate = response.data._created._seconds
         return data = {
             bfName: bfName,
@@ -202,6 +202,7 @@ async function getBeerData() {
                 ibu: `${data.ibu}`, 
                 dryHops: `${data.dryHops}`, 
                 yeast: `${data.yeast}`,
+                
                 brewedDate: `${data.brewedDate}`
             }}
         const update = await Beer.findOneAndUpdate(query, replace)
