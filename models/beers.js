@@ -13,10 +13,11 @@ const BeerSchema = new Schema({
     previewDescription: String,
     description: String,
     ontap: String,
-    yeast: [String],
-    yeastLab: String,
-    yeastName: String,
-    yeastDescription: String,
+    yeast: [{
+        lab : String,
+        name : String,
+        description : String
+    }],
     brewedDate: Number
 });
 

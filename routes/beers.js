@@ -30,6 +30,8 @@ router.post('/', isLoggedIn, validateBeer, catchAsync(async (req, res, next) => 
 
 router.get('/:id', catchAsync(async (req, res, next) => {
     const beer = await Beer.findById(req.params.id)
+    /*
+    //fetching data direct from API
         await axios({
         method: 'get',
         url: 'https://api.brewfather.app/v1/recipes/' + beer.bfId,
@@ -73,7 +75,9 @@ router.get('/:id', catchAsync(async (req, res, next) => {
       console.log(error);
       return data = 'error'
     })
-    res.render('beers/info', { beer, data})
+    */
+   let data = 'error'
+    res.render('beers/info', { beer, data })
 }))
 
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res, next) => {

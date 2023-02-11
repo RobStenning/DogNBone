@@ -173,9 +173,14 @@ async function getBeerData() {
         let style = response.data.style.name
         let ibu = response.data.ibu
         let dryHops = response.data.sumDryHopPerLiter
-        let yeastLab = response.data.yeasts[0].laboratory
-        let yeastName = response.data.yeasts[0].name
-        let yeastDescription = response.data.yeasts[0].description
+        let yeast = {
+            lab: response.data.yeasts[0].laboratory,
+            name: response.data.yeasts[0].name,
+            description: response.data.yeasts[0].description
+        }
+        //let yeastLab = response.data.yeasts[0].laboratory
+        //let yeastName = response.data.yeasts[0].name
+        //let yeastDescription = response.data.yeasts[0].description
         
         let brewedDate = response.data._created._seconds
         return data = {
@@ -184,9 +189,7 @@ async function getBeerData() {
             style: style,
             ibu: ibu,
             dryHops: dryHops,
-            yeastLab: yeastLab,
-            yeastName: yeastName,
-            yeastDescription: yeastDescription,
+            yeast: yeast,
             brewedDate: brewedDate
         }
         })
@@ -197,7 +200,6 @@ async function getBeerData() {
         //console.log(data.bfName[0])
         //console.log(data.style)
         //const beer = await Beer.findByIdAndUpdate(id, { ...req.body.beer })
-        console.log(data.yeastName)
         //console.log(data.yeast.lab)
         let query = { bfId: `${bfBeerIds[i]}` }
         let replace = { $set: 
@@ -206,11 +208,13 @@ async function getBeerData() {
                 abv: `${data.abv}`,
                 style: `${data.style}`, 
                 ibu: `${data.ibu}`, 
-                dryHops: `${data.dryHops}`, 
-                yeastLab: `${data.yeastLab}`,
-                yeastName: `${data.yeastName}`,
-                yeastDescription: `${data.yeastDescription}`,
-                brewedDate: `${data.brewedDate}`
+                dryHops: `${data.dryHops}`,
+                brewedDate: `${data.brewedDate}`,
+                yeast : [ {
+                    "lab": `${data.yeast.lab}`,
+                    "name": `${data.yeast.name}`,
+                    "description": `${data.yeast.description}`
+                }]
             }}
         const update = await Beer.findOneAndUpdate(query, replace)
         //console.log(update)
