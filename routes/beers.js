@@ -80,9 +80,61 @@ router.get('/:id', catchAsync(async (req, res, next) => {
     res.render('beers/info', { beer, data })
 }))
 
+async function updateSingle(beer){
+    await axios({
+        method: 'get',
+        url: 'https://api.brewfather.app/v1/recipes/' + beer.bfId,
+        headers: { 'Authorization': 'Basic '+ encoded }
+    })
+    .then(function (response) {
+        let hops = [];
+        
+        for (let i = 0; i < response.data.hops.length; i++){
+            const hop = {
+                name: response.data.hops[i].name,
+                use: response.data.hops[i].use,
+                alpha: response.data.hops[i].alpha,
+                amount: response.data.hops[i].amount   
+            };
+            hops.push(hop)
+        };
+        return data = {
+            hops: hops
+        }
+    })
+    .catch(function (error) {
+      return data = 'error'
+    })
+    console.log(beer.bfId)
+    console.log(data.hops.length)
+    for (let i = 0; i < data.hops.length; i++){
+    console.log(data.hops[i].name)
+        let query = { bfId: `${beer.bfId}` }
+        let replace = { $addToSet: 
+            { 
+                hops: { $each: [`${data.hops[i].name}`]
+                }
+                        //,"use": `${data.hops[i].use}`,
+                        //"alpha": `${data.hops[i].alpha}`,
+                        //"amount": `${data.hops[i].amount}`    
+                    //}]
+                }
+            }
+
+        const update = await Beer.findOneAndUpdate(query, replace)
+        }
+
+}
+
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res, next) => {
     const beer = await Beer.findById(req.params.id)
     res.render('beers/edit', { beer })
+}))
+
+router.get('/:id/update', isLoggedIn, catchAsync(async (req, res, next) => {
+    const beer = await Beer.findById(req.params.id)
+    updateSingle(beer)
+    res.redirect(`/beers/${beer._id}`)
 }))
 
 router.put('/:id', validateBeer, catchAsync( async (req, res, next) => {

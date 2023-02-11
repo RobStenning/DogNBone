@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const hopSchema = new Schema({
+    name : String,
+    use : String,
+    alpha : String,
+    amount : String
+})
+
 const BeerSchema = new Schema({
     tapNo: Number,
     name: String,
@@ -17,6 +24,11 @@ const BeerSchema = new Schema({
         lab : String,
         name : String,
         description : String
+    }],
+    hops: [{
+            hop: [
+                hopSchema
+            ],
     }],
     brewedDate: Number
 });
