@@ -88,8 +88,18 @@ async function updateSingle(beer){
         headers: { 'Authorization': 'Basic '+ encoded }
     })
     .then(function (response) {
+        let bfName = [response.data.name]
+        let abv = response.data.abv
+        let style = response.data.style.name
+        let ibu = response.data.ibu
+        let dryHops = response.data.sumDryHopPerLiter
+        let yeast = {
+            lab: response.data.yeasts[0].laboratory,
+            name: response.data.yeasts[0].name,
+            description: response.data.yeasts[0].description
+        }
+        let brewedDate = response.data._created._seconds        
         let hops = [];
-        
         for (let i = 0; i < response.data.hops.length; i++){
             const hop = {
                 name: response.data.hops[i].name,
@@ -100,6 +110,13 @@ async function updateSingle(beer){
             hops.push(hop)
         };
         return data = {
+            bfName: bfName,
+            abv: abv,
+            style: style,
+            ibu: ibu,
+            dryHops: dryHops,
+            yeast: yeast,
+            brewedDate: brewedDate,
             hops: hops
         }
     })
@@ -111,13 +128,27 @@ async function updateSingle(beer){
     for (let i = 0; i < data.hops.length; i++){
     console.log(data.hops[i].name)
         let query = { bfId: `${beer.bfId}` }
-        let replace = { $push: 
-            { 
-                hopsName: { $each: [data.hops[i].name]},
-                hopsUse: { $each: [data.hops[i].use]},
-                hopsAlpha: { $each: [data.hops[i].alpha]},
-                hopsAmount: { $each: [data.hops[i].amount]}
-            }
+        let replace = { 
+            $set: {
+                bfName: `${data.bfName}`,
+                abv: `${data.abv}`,
+                style: `${data.style}`, 
+                ibu: `${data.ibu}`, 
+                dryHops: `${data.dryHops}`,
+                brewedDate: `${data.brewedDate}`,
+                yeast : [ {
+                    "lab": `${data.yeast.lab}`,
+                    "name": `${data.yeast.name}`,
+                    "description": `${data.yeast.description}`
+                }]
+            },
+            $push: 
+                { 
+                    hopsName: { $each: [data.hops[i].name]},
+                    hopsUse: { $each: [data.hops[i].use]},
+                    hopsAlpha: { $each: [data.hops[i].alpha]},
+                    hopsAmount: { $each: [data.hops[i].amount]}
+                }
         }
 
         const update = await Beer.findOneAndUpdate(query, replace)
