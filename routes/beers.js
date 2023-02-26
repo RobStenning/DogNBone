@@ -94,12 +94,12 @@ async function updateSingle(beer){
         let style = response.data.style.name
         let ibu = response.data.ibu
         let dryHops = response.data.sumDryHopPerLiter
+        let brewedDate = response.data._created._seconds        
         let yeast = {
             lab: response.data.yeasts[0].laboratory,
             name: response.data.yeasts[0].name,
             description: response.data.yeasts[0].description
         }
-        let brewedDate = response.data._created._seconds        
         let hops = [];
         for (let i = 0; i < response.data.hops.length; i++){
             const hop = {
@@ -110,15 +110,25 @@ async function updateSingle(beer){
             };
             hops.push(hop)
         };
+        let malts = [];
+        for (let i = 0; i < response.data.data.mashFermentables.length; i++){
+            const malt = {
+                supplier: response.data.data.mashFermentables[i].supplier,
+                name: response.data.data.mashFermentables[i].name,
+                amount: response.data.data.mashFermentables[i].amount
+            };
+            malts.push(malt)
+        }
         return data = {
             bfName: bfName,
             abv: abv,
             style: style,
             ibu: ibu,
             dryHops: dryHops,
-            yeast: yeast,
             brewedDate: brewedDate,
-            hops: hops
+            yeast: yeast,
+            hops: hops,
+            malts: malts
         }
     })
     .catch(function (error) {
@@ -126,23 +136,25 @@ async function updateSingle(beer){
     })
     console.log(beer.bfId)
     console.log(data.hops.length)
+    let query = { bfId: `${beer.bfId}` }
+    let replace = { 
+        $set: {
+            bfName: `${data.bfName}`,
+            abv: `${data.abv}`,
+            style: `${data.style}`, 
+            ibu: `${data.ibu}`, 
+            dryHops: `${data.dryHops}`,
+            brewedDate: `${data.brewedDate}`,
+            yeast : [ {
+                "lab": `${data.yeast.lab}`,
+                "name": `${data.yeast.name}`,
+                "description": `${data.yeast.description}`
+            }]
+        }}
+    const update = await Beer.findOneAndUpdate(query, replace)
     for (let i = 0; i < data.hops.length; i++){
     console.log(data.hops[i].name)
-        let query = { bfId: `${beer.bfId}` }
-        let replace = { 
-            $set: {
-                bfName: `${data.bfName}`,
-                abv: `${data.abv}`,
-                style: `${data.style}`, 
-                ibu: `${data.ibu}`, 
-                dryHops: `${data.dryHops}`,
-                brewedDate: `${data.brewedDate}`,
-                yeast : [ {
-                    "lab": `${data.yeast.lab}`,
-                    "name": `${data.yeast.name}`,
-                    "description": `${data.yeast.description}`
-                }]
-            },
+        let replace = {
             $push: 
                 { 
                     hopsName: { $each: [data.hops[i].name]},
@@ -151,12 +163,23 @@ async function updateSingle(beer){
                     hopsAmount: { $each: [data.hops[i].amount]}
                 }
         }
-
-        const update = await Beer.findOneAndUpdate(query, replace)
+    const update = await Beer.findOneAndUpdate(query, replace)
+    }
+    for (let i = 0; i < data.malts.length; i++){
+    console.log(data.malts[i].name)
+        let replace = {
+            $push: 
+                { 
+                    maltsSupplier: { $each: [data.malts[i].supplier]},
+                    maltsName: { $each: [data.malts[i].name]},
+                    maltsAmount: { $each: [data.malts[i].amount]}
+                }
         }
+    const update = await Beer.findOneAndUpdate(query, replace)
+    }
 
 }
-async function clearHops(beer){
+async function clear(beer){
     console.log("clearing hops")
     let query = { bfId: `${beer.bfId}` }
     let replace = { $set: 
@@ -164,7 +187,10 @@ async function clearHops(beer){
             hopsName: [],
             hopsUse: [],
             hopsAlpha: [],
-            hopsAmount: []
+            hopsAmount: [],
+            maltsSupplier: [],
+            maltsName: [],
+            maltsAmount: []
         }           
     }
     const update = await Beer.findOneAndUpdate(query, replace)
@@ -178,7 +204,7 @@ router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res, next) => {
 
 router.get('/:id/update', isLoggedIn, catchAsync(async (req, res, next) => {
     const beer = await Beer.findById(req.params.id)
-    clearHops(beer)
+    clear(beer)
     //updateSingle(beer)
     res.redirect(`/beers/${beer._id}`)
 }))

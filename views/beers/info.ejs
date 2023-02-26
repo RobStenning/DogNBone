@@ -46,10 +46,13 @@
                 <% for (let i = 0; i < dryHops.length; i++){ %>
                         <% dryHopsList.push(dryHops[i])} %>
                 <% let maltsList = [] %>
-                <% /* %>
-                <% for (let i = 0; i < beer.malts.length; i++){ %>
-                         <% maltsList.push(beer.malts[i]) %>
-                <% } */%>
+                <% console.log(beer.maltsName.length) %>
+                <% for (let i = 0; i < beer.maltsName.length; i++){ %>
+                    <% let entries = new Map([['name', `${beer.maltsName[i]}`], ['supplier', `${beer.maltsSupplier[i]}`], ['amount',  `${beer.maltsAmount[i]}`]]) %>
+                    <% let malt = Object.fromEntries(entries) %>
+                    <% console.log(malt) %>
+                    <% maltsList.push(malt) %>
+                <% } %>
         <% %> 
         <p class="ingredients" >Hops</p>
         <div class="imageblocks" >

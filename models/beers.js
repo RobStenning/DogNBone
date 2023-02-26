@@ -20,6 +20,7 @@ const BeerSchema = new Schema({
     previewDescription: String,
     description: String,
     ontap: String,
+    brewedDate: Number,
     yeast: [{
         lab : String,
         name : String,
@@ -29,7 +30,9 @@ const BeerSchema = new Schema({
     hopsUse: [String],
     hopsAlpha: [Number],
     hopsAmount: [Number],
-    brewedDate: Number
+    maltsSupplier: [String],
+    maltsName: [String],
+    maltsAmount: [Number]
 });
 
 module.exports = mongoose.model('Beer', BeerSchema);
