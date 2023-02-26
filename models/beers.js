@@ -25,11 +25,10 @@ const BeerSchema = new Schema({
         name : String,
         description : String
     }],
-    hops: [{
-            hop: [
-                hopSchema
-            ],
-    }],
+    hopsName: [String],
+    hopsUse: [String],
+    hopsAlpha: [Number],
+    hopsAmount: [Number],
     brewedDate: Number
 });
 

@@ -24,27 +24,32 @@
                 <p class="descriptiontext" ><%= beer.description%></p>
             </div>
         </div>
-        <% if(data === 'error'){%>
+        <% if(beer === 'error'){%>
 
             <% } else { %> 
                 <% let hotSideHops = [] %>
+                <% let hotSideHopsAmount = [] %>
                 <% let dryHops = [] %>
-                 <% for (let i = 0; i < data.hops.length; i++){ %>
-                    <% if (data.hops[i].use === 'Dry Hop'){ %> 
-                    <% dryHops.push(data.hops[i]) %>
+                <% let dryHopsAmount = [] %>
+                 <% for (let i = 0; i < beer.hopsName.length; i++){ %>
+                    <% if (beer.hopsUse[i] === 'Dry Hop'){ %> 
+                    <% dryHops.push(beer.hopsName[i]) %>
+                    <% dryHopsAmount.push(beer.hopsAmount[i]) %>
                     <% } else {%>
-                        <% hotSideHops.push(data.hops[i]) %>
+                        <% hotSideHops.push(beer.hopsName[i]) %>
+                        <% hotSideHopsAmount.push(beer.hopsAmount[i]) %>
                         <% }} %>
                 <% let dryHopsList = [] %> 
                 <% let hotSideHopsList = [] %> 
                 <% for (let i = 0; i < hotSideHops.length; i++){ %>
-                       <% hotSideHopsList.push(hotSideHops[i].name)} %>
+                       <% hotSideHopsList.push(hotSideHops[i])} %>
                 <% for (let i = 0; i < dryHops.length; i++){ %>
-                        <% dryHopsList.push(dryHops[i].name)} %>
+                        <% dryHopsList.push(dryHops[i])} %>
                 <% let maltsList = [] %>
-                <% for (let i = 0; i < data.malts.length; i++){ %>
-                         <% maltsList.push(data.malts[i]) %>
-                <% } %>
+                <% /* %>
+                <% for (let i = 0; i < beer.malts.length; i++){ %>
+                         <% maltsList.push(beer.malts[i]) %>
+                <% } */%>
         <% %> 
         <p class="ingredients" >Hops</p>
         <div class="imageblocks" >
@@ -54,14 +59,14 @@
                 <ul class="menuflex-container" >
                     <li class="ingredients-flex-item" ><%= hotSideHopsList.join(' - ')%></li>
                 </ul>
-                <p class="ingredients-flex-item"><%= hotSideHops.map(x => x.amount).reduce((prev, curr) => prev + curr, 0)%>g</p>
+                <p class="ingredients-flex-item"><%= hotSideHopsAmount.map(x => x).reduce((prev, curr) => prev + curr, 0)%>g</p>
                 <% } %>
                 <% if(dryHopsList.length > 0){ %>  
                 <p class="subtitle" >Dry Hops</p>
                 <ul class="menuflex-container" >
                     <li class="ingredients-flex-item" ><%= dryHopsList.join(' - ')%></li>
                 </ul>
-                <p class="ingredients-flex-item"><%= dryHops.map(x => x.amount).reduce((prev, curr) => prev + curr, 0)%>g</p>
+                <p class="ingredients-flex-item"><%= dryHopsAmount.map(x => x).reduce((prev, curr) => prev + curr, 0)%>g</p>
                 <% } %>
                 <br>
             </div>
@@ -87,11 +92,10 @@
         </div>
 
         <% } %>
-        <div class="ingredients">Test API = <%= beer.hops[0].hop[0].name %>  </div>
-        <div class="ingredients">Test API = <%= beer.hops[0].hop[0].name %>  </div>
-        <div class="ingredients">Test API = <%= beer.hops[0].hop[0].use %>  </div>
-        <div class="ingredients">Test API = <%= beer.hops[0].hop[0].alpha %>  </div>
-        <div class="ingredients">Test API = <%= beer.hops[0].hop[0].amount %>  </div>
+        <div class="ingredients">Test API = <%= beer.hopsName.length %>  </div>
+        <div class="ingredients">Test use = <%= beer.hopsUse.length %>  </div>
+        <div class="ingredients">Test alpha = <%= beer.hopsAlpha.length %>  </div>
+        <div class="ingredients">Test amount = <%= typeof beer.hopsAmount[0] %>  </div>
         <p class="ingredients" >Yeast</p>
         <div class="imageblocks" >
             <div>            
