@@ -27,9 +27,15 @@ module.exports.beerSchema = Joi.object({
     beer: Joi.object({
         tapNo: Joi.number().required().min(1),
         name: Joi.string().required().escapeHTML(),
+        bfName: Joi.string().escapeHTML(),
         bfId: Joi.string().required().escapeHTML(),
+        abv: Joi.number().min(0),
+        style: Joi.string().escapeHTML(),
+        ibu: Joi.number().min(0),
+        dryHops: Joi.number().min(0),
         previewDescription: Joi.string().required().escapeHTML(),
         description: Joi.string().required().escapeHTML(),
-        ontap: Joi.string().required().escapeHTML()
+        ontap: Joi.string().required().escapeHTML(),
+        brewedDate: Joi.number()
     }).required()
 });

@@ -147,19 +147,11 @@ async function getBeerData() {
     .catch(function (error) {
       return data = 'error'
     })
-    //const beer = await Beer.findOne({}, {name: 1})
-    //const beer = await Beer.updateMany({}, { yeast: "updated"})
-    //await beer.save()
-    //const update = { yeast: data.yeast[0]}
-    //console.log(Beer.count({}))
-    //console.log(`data.yeast = ${data.yeast[0]}, ${data.yeast[1]}, ${data.yeast[2]}`)
-    //const update = await Beer.findByIdAndUpdate({"_id": `${beer.id}`}, {"yeast": `${data.yeast}`})
     console.log('allBrewFatherBeers')
     console.log(data.allBFBeers)
     console.log(data.allBFBeers.length)
     let totalBFBeers = data.allBFBeers.length
     let bfBeerIds = [...data.allBFBeers]
-    //testing - taking first beer and taking data
     console.log('start of recipe by id')
     for (let i=0; i<totalBFBeers; i++){
         await axios({
@@ -178,10 +170,16 @@ async function getBeerData() {
             name: response.data.yeasts[0].name,
             description: response.data.yeasts[0].description
         }
-        //let yeastLab = response.data.yeasts[0].laboratory
-        //let yeastName = response.data.yeasts[0].name
-        //let yeastDescription = response.data.yeasts[0].description
-        
+        let hops = [];
+        for (let i = 0; i < response.data.hops.length; i++){
+            const hop = {
+                name: response.data.hops[i].name,
+                use: response.data.hops[i].use,
+                alpha: response.data.hops[i].alpha,
+                amount: response.data.hops[i].amount   
+            };
+            hops.push(hop)
+        };
         let brewedDate = response.data._created._seconds
         return data = {
             bfName: bfName,
@@ -190,17 +188,13 @@ async function getBeerData() {
             ibu: ibu,
             dryHops: dryHops,
             yeast: yeast,
-            brewedDate: brewedDate
+            brewedDate: brewedDate,
+            hops: hops
         }
         })
         .catch(function (error) {
-      //console.log(error);
         return data = 'error'
         })
-        //console.log(data.bfName[0])
-        //console.log(data.style)
-        //const beer = await Beer.findByIdAndUpdate(id, { ...req.body.beer })
-        //console.log(data.yeast.lab)
         let query = { bfId: `${bfBeerIds[i]}` }
         let replace = { $set: 
             { 
@@ -217,7 +211,6 @@ async function getBeerData() {
                 }]
             }}
         const update = await Beer.findOneAndUpdate(query, replace)
-        //console.log(update)
     }
 }
 
