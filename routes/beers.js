@@ -24,8 +24,9 @@ let encoded = Buffer.from(token).toString('base64');
 router.post('/', isLoggedIn, validateBeer, catchAsync(async (req, res, next) => { 
     const beer = new Beer(req.body.beer)
     await beer.save();
+    updateSingle(beer)
     req.flash('success', 'New Beer Added')
-    res.redirect(`/beers/${beer._id}`)
+    res.redirect(`/taplist`)
 }))
 
 router.get('/:id', catchAsync(async (req, res, next) => {
