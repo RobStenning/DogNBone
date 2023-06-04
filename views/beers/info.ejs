@@ -95,10 +95,7 @@
         </div>
 
         <% } %>
-        <div class="ingredients">Test API = <%= beer.hopsName.length %>  </div>
-        <div class="ingredients">Test use = <%= beer.hopsUse.length %>  </div>
-        <div class="ingredients">Test alpha = <%= beer.hopsAlpha.length %>  </div>
-        <div class="ingredients">Test amount = <%= typeof beer.hopsAmount[0] %>  </div>
+        <% if(beer.yeast[0].lab !== undefined) { %>
         <p class="ingredients" >Yeast</p>
         <div class="imageblocks" >
             <div>            
@@ -113,7 +110,7 @@
                 </div>
             </div>
         </div>
-
+        <% } %>
         <% %> 
         <br>
         
