@@ -10,41 +10,46 @@
         <div class="imageblocks" >
             <div>            
                 <ul class="menuflex-container" >
-                    <li class="flex-item" >ABV - <%= beer.abv%>%</li>
+                    <li class="flex-item" >ABV - <%= beer.abv.toFixed(1)%>%</li>
                     <li class="flex-item" >STYLE - <%= beer.style%></li>
-                    <li class="flex-item" >IBU - <%= beer.ibu%></li>         
+                    <li class="flex-item" >IBU - <%= beer.ibu.toFixed()%></li>         
                     <% if(beer.dryHops > 0) { %> 
-                    <li class="flex-item" >DRY HOPS - <%= beer.dryHops%> g/l</li>
+                    <li class="flex-item" >DRY HOPS - <%= beer.dryHops.toFixed(1)%> g/l</li>
                     <% } %> 
                     <li class="flex-item" >STATUS - <%= beer.ontap%></li>
-                    <% if (data !== 'error'){ %> 
-                    <li class="flex-item" >BREWED - <%= data.timeStamp%></li>
-                    <% } %> 
+                    <% let date = new Date(beer.brewedDate * 1000)%>
+                    <li class="flex-item" >BREWED - <%= date.toUTCString().slice(8, 16)%></li>
                 </ul>
                 <br>
                 <p class="descriptiontext" ><%= beer.description%></p>
             </div>
         </div>
-        <% if(data === 'error'){%>
+        <% if(beer === 'error'){%>
 
             <% } else { %> 
                 <% let hotSideHops = [] %>
+                <% let hotSideHopsAmount = [] %>
                 <% let dryHops = [] %>
-                 <% for (let i = 0; i < data.hops.length; i++){ %>
-                    <% if (data.hops[i].use === 'Dry Hop'){ %> 
-                    <% dryHops.push(data.hops[i]) %>
+                <% let dryHopsAmount = [] %>
+                 <% for (let i = 0; i < beer.hopsName.length; i++){ %>
+                    <% if (beer.hopsUse[i] === 'Dry Hop'){ %> 
+                    <% dryHops.push(beer.hopsName[i]) %>
+                    <% dryHopsAmount.push(beer.hopsAmount[i]) %>
                     <% } else {%>
-                        <% hotSideHops.push(data.hops[i]) %>
+                        <% hotSideHops.push(beer.hopsName[i]) %>
+                        <% hotSideHopsAmount.push(beer.hopsAmount[i]) %>
                         <% }} %>
                 <% let dryHopsList = [] %> 
                 <% let hotSideHopsList = [] %> 
                 <% for (let i = 0; i < hotSideHops.length; i++){ %>
-                       <% hotSideHopsList.push(hotSideHops[i].name)} %>
+                       <% hotSideHopsList.push(hotSideHops[i])} %>
                 <% for (let i = 0; i < dryHops.length; i++){ %>
-                        <% dryHopsList.push(dryHops[i].name)} %>
+                        <% dryHopsList.push(dryHops[i])} %>
                 <% let maltsList = [] %>
-                <% for (let i = 0; i < data.malts.length; i++){ %>
-                         <% maltsList.push(data.malts[i]) %>
+                <% for (let i = 0; i < beer.maltsName.length; i++){ %>
+                    <% let entries = new Map([['name', `${beer.maltsName[i]}`], ['supplier', `${beer.maltsSupplier[i]}`], ['amount',  `${beer.maltsAmount[i]}`]]) %>
+                    <% let malt = Object.fromEntries(entries) %>
+                    <% maltsList.push(malt) %>
                 <% } %>
         <% %> 
         <p class="ingredients" >Hops</p>
@@ -55,14 +60,14 @@
                 <ul class="menuflex-container" >
                     <li class="ingredients-flex-item" ><%= hotSideHopsList.join(' - ')%></li>
                 </ul>
-                <p class="ingredients-flex-item"><%= hotSideHops.map(x => x.amount).reduce((prev, curr) => prev + curr, 0)%>g</p>
+                <p class="ingredients-flex-item"><%= hotSideHopsAmount.map(x => x).reduce((prev, curr) => prev + curr, 0)%>g</p>
                 <% } %>
                 <% if(dryHopsList.length > 0){ %>  
                 <p class="subtitle" >Dry Hops</p>
                 <ul class="menuflex-container" >
                     <li class="ingredients-flex-item" ><%= dryHopsList.join(' - ')%></li>
                 </ul>
-                <p class="ingredients-flex-item"><%= dryHops.map(x => x.amount).reduce((prev, curr) => prev + curr, 0)%>g</p>
+                <p class="ingredients-flex-item"><%= dryHopsAmount.map(x => x).reduce((prev, curr) => prev + curr, 0)%>g</p>
                 <% } %>
                 <br>
             </div>
@@ -86,23 +91,25 @@
                 <br>
             </div>
         </div>
+
+        <% } %>
+        <% if(beer.yeast[0].lab !== undefined) { %>
         <p class="ingredients" >Yeast</p>
         <div class="imageblocks" >
             <div>            
                 <ul class="menuflex-container" >
-                    <li class="ingredients-flex-item" ><%= data.yeast[0] + ' - ' + data.yeast[1]%></li>
+                    <li class="ingredients-flex-item" ><%= beer.yeast[0].lab + ' - ' + beer.yeast[0].name%></li>
                 </ul>
                 <br>
                 <div class="menuflex-container">
                     <div class="ingredients-flex-item">
-                    <%= data.yeast[2]%> 
+                    <%= beer.yeast[0].description%> 
                     </div>
                 </div>
             </div>
         </div>
-
-        <% %>
-        <% } %> 
+        <% } %>
+        <% %> 
         <br>
         
             <% if(currentUser) { %>

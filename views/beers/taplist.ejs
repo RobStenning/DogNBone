@@ -17,11 +17,11 @@
 				<div>
 					<h1 class="beertitle">- <%= beer.name %> -</h1>
 					<ul class="menuflex-container">
-						<li class="flex-item">ABV - <%= beer.abv %>%</li>
+						<li class="flex-item">ABV - <%= beer.abv.toFixed(1) %>%</li>
 						<li class="flex-item">STYLE - <%= beer.style %></li>
-						<li class="flex-item">IBU - <%= beer.ibu %></li>
+						<li class="flex-item">IBU - <%= beer.ibu.toFixed(0) %></li>
 						<% if (beer.dryHops > 0){ %> 
-						<li class="flex-item">DRY HOPS - <%= beer.dryHops %> g/l</li>
+						<li class="flex-item">DRY HOPS - <%= beer.dryHops.toFixed(1) %> g/l</li>
 						<% } %> 
 				  	</ul>
 					<br>
@@ -41,11 +41,11 @@
 				<div>
 					<h1 class="beertitle">- <%= beer.name %> -</h1>
 					<ul class="menuflex-container">
-						<li class="flex-item">ABV - <%= beer.abv %>%</li>
+						<li class="flex-item">ABV - <%= beer.abv.toFixed(1) %>%</li>
 						<li class="flex-item">STYLE - <%= beer.style %></li>
-						<li class="flex-item">IBU - <%= beer.ibu %></li>
+						<li class="flex-item">IBU - <%= beer.ibu.toFixed(0) %></li>
 						<% if(beer.dryHops > 0) { %>
-						<li class="flex-item">DRY HOPS - <%= beer.dryHops %> g/l</li>
+						<li class="flex-item">DRY HOPS - <%= beer.dryHops.toFixed(1) %> g/l</li>
 						<% } %> 
 					  </ul>
 					<br>
@@ -65,11 +65,11 @@
 			<div>
 				<h1 class="beertitle">- <%= beer.name %> -</h1>
 				<ul class="menuflex-container">
-					<li class="flex-item">ABV - <%= beer.abv %>%</li>
+					<li class="flex-item">ABV - <%= beer.abv.toFixed(1) %>%</li>
 					<li class="flex-item">STYLE - <%= beer.style %></li>
-					<li class="flex-item">IBU - <%= beer.ibu %></li>
+					<li class="flex-item">IBU - <%= beer.ibu.toFixed(0) %></li>
 					<% if(beer.dryHops > 0) { %>
-					<li class="flex-item">DRY HOPS - <%= beer.dryHops %> g/l</li>
+					<li class="flex-item">DRY HOPS - <%= beer.dryHops.toFixed(1) %> g/l</li>
 					<% } %> 
 				  </ul>
 				<br>

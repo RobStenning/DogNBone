@@ -22,6 +22,9 @@ const userRoute = require('./routes/users');
 const mongoSanitize = require('express-mongo-sanitize');
 const db = mongoose.connection;
 const axios = require('axios');
+const beers = require('./models/beers');
+const res = require('express/lib/response');
+const { updateMany } = require('./models/user');
 
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/dog-and-bone';
@@ -117,6 +120,104 @@ app.use('/beers', beerRoutes)
 
 app.get('/robtoberfest', (req, res) =>{
     res.render('robtoberfest');
+})
+
+
+const username = process.env.brewFatherUName;
+const password = process.env.brewFatherPassword;
+let token = `${username}:${password}`;
+let encoded = Buffer.from(token).toString('base64');
+
+async function getBeerData() {
+    await axios({
+        method: 'get',
+        url: 'https://api.brewfather.app/v1/recipes/',
+        params: { 'limit': '50' },
+        headers: { 'Authorization': 'Basic '+ encoded }
+    })
+    .then(function (response) {
+        let allBFBeers = []
+        for(let i=0; i<response.data.length; i++){
+            allBFBeers.push(response.data[i]._id)
+        }
+        return data = {
+            allBFBeers: allBFBeers,
+        }
+    })
+    .catch(function (error) {
+      return data = 'error'
+    })
+    console.log('allBrewFatherBeers')
+    console.log(data.allBFBeers)
+    console.log(data.allBFBeers.length)
+    let totalBFBeers = data.allBFBeers.length
+    let bfBeerIds = [...data.allBFBeers]
+    console.log('start of recipe by id')
+    for (let i=0; i<totalBFBeers; i++){
+        await axios({
+            method: 'get',
+            url: 'https://api.brewfather.app/v1/recipes/' + bfBeerIds[i],
+            headers: { 'Authorization': 'Basic '+ encoded }
+        })
+        .then(function (response) {
+        let bfName = [response.data.name]
+        let abv = response.data.abv
+        let style = response.data.style.name
+        let ibu = response.data.ibu
+        let dryHops = response.data.sumDryHopPerLiter
+        let yeast = {
+            lab: response.data.yeasts[0].laboratory,
+            name: response.data.yeasts[0].name,
+            description: response.data.yeasts[0].description
+        }
+        let hops = [];
+        for (let i = 0; i < response.data.hops.length; i++){
+            const hop = {
+                name: response.data.hops[i].name,
+                use: response.data.hops[i].use,
+                alpha: response.data.hops[i].alpha,
+                amount: response.data.hops[i].amount   
+            };
+            hops.push(hop)
+        };
+        let brewedDate = response.data._created._seconds
+        return data = {
+            bfName: bfName,
+            abv: abv,
+            style: style,
+            ibu: ibu,
+            dryHops: dryHops,
+            yeast: yeast,
+            brewedDate: brewedDate,
+            hops: hops
+        }
+        })
+        .catch(function (error) {
+        return data = 'error'
+        })
+        let query = { bfId: `${bfBeerIds[i]}` }
+        let replace = { $set: 
+            { 
+                bfName: `${data.bfName}`,
+                abv: `${data.abv}`,
+                style: `${data.style}`, 
+                ibu: `${data.ibu}`, 
+                dryHops: `${data.dryHops}`,
+                brewedDate: `${data.brewedDate}`,
+                yeast : [ {
+                    "lab": `${data.yeast.lab}`,
+                    "name": `${data.yeast.name}`,
+                    "description": `${data.yeast.description}`
+                }]
+            }}
+        const update = await Beer.findOneAndUpdate(query, replace)
+    }
+}
+
+app.get('/update', (req, res) => {
+    console.log("running update")
+    getBeerData()
+
 })
 
 app.get('/login', (req, res) =>{
