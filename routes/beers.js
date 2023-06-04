@@ -31,58 +31,11 @@ router.post('/', isLoggedIn, validateBeer, catchAsync(async (req, res, next) => 
 
 router.get('/:id', catchAsync(async (req, res, next) => {
     const beer = await Beer.findById(req.params.id)
-    /*
-    //fetching data direct from API
-        await axios({
-        method: 'get',
-        url: 'https://api.brewfather.app/v1/recipes/' + beer.bfId,
-        headers: { 'Authorization': 'Basic '+ encoded }
-    })
-    .then(function (response) {
-        let hops = [];
-        
-        for (let i = 0; i < response.data.hops.length; i++){
-            const hop = {
-                name: response.data.hops[i].name,
-                use: response.data.hops[i].use,
-                alpha: response.data.hops[i].alpha,
-                amount: response.data.hops[i].amount   
-            };
-            hops.push(hop)
-        };
-        
-        let malts = [];
-        for (let i = 0; i < response.data.data.mashFermentables.length; i++){
-            const malt = {
-                supplier: response.data.data.mashFermentables[i].supplier,
-                name: response.data.data.mashFermentables[i].name,
-                amount: response.data.data.mashFermentables[i].amount
-            };
-            malts.push(malt)
-        };
-        
-        let yeast = [response.data.yeasts[0].laboratory, response.data.yeasts[0].name];
-        let brewedDate = [response.data._created._seconds];
-        
-        return data = {
-            hops: hops,
-            malts: malts,
-            yeast: yeast,
-            brewedDate: brewedDate
-        }
-    }
-    )
-    .catch(function (error) {
-      console.log(error);
-      return data = 'error'
-    })
-    */
-   let data = 'error'
+    let data = 'error'
     res.render('beers/info', { beer, data })
 }))
 
 async function updateSingle(beer){
-    console.log("update single")
     await axios({
         method: 'get',
         url: 'https://api.brewfather.app/v1/recipes/' + beer.bfId,
@@ -134,8 +87,7 @@ async function updateSingle(beer){
     .catch(function (error) {
       return data = 'error'
     })
-    console.log(beer.bfId)
-    console.log(data.hops.length)
+    // for testing console.log(beer.bfId)
     let query = { bfId: `${beer.bfId}` }
     let replace = { 
         $set: {
@@ -153,7 +105,6 @@ async function updateSingle(beer){
         }}
     const update = await Beer.findOneAndUpdate(query, replace)
     for (let i = 0; i < data.hops.length; i++){
-    console.log(data.hops[i].name)
         let replace = {
             $push: 
                 { 
@@ -166,7 +117,6 @@ async function updateSingle(beer){
     const update = await Beer.findOneAndUpdate(query, replace)
     }
     for (let i = 0; i < data.malts.length; i++){
-    console.log(data.malts[i].name)
         let replace = {
             $push: 
                 { 
@@ -180,7 +130,6 @@ async function updateSingle(beer){
 
 }
 async function clear(beer){
-    console.log("clearing hops")
     let query = { bfId: `${beer.bfId}` }
     let replace = { $set: 
         { 
