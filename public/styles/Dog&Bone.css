@@ -156,6 +156,14 @@ h2{
     margin: 0;
     list-style: none;
   }
+.display-menuflex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
   
 .flex-item {
     font-size: 1.25rem;
