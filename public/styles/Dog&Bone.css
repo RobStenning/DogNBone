@@ -263,22 +263,25 @@ h2{
 	background: rgba(0, 0, 0, 0.25);
 	padding: 1rem;
 	padding-left: 7.5rem;
-	padding-right: 7.5rem;
-	
-	
+	padding-right: 7.5rem;	
   }
-  .imageblocks > img {
-	margin: .3rem 1rem 0.5rem 0;
-	
 
-  }
-  .imageblocks > div {
+.menu-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+}
+
+.imageblocks > img {
+	margin: .3rem 1rem 0.5rem 0;
+}
+
+.imageblocks > div {
 	flex: 1;
-  }
-  .imageblocks h1 {
+}
+.imageblocks h1 {
 	font-weight: 500;
 	margin: 0 0 0.3rem 0;
-  }
+}
 
 .ingredients {
     text-align: center;
