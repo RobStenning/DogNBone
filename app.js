@@ -106,6 +106,16 @@ app.get('/taplist', catchAsync(async (req, res, next) => {
     res.render('beers/taplist', { beers, displayOntap, displayIncoming, displayBottled, displayPrevious });
 }))
 
+app.get('/taplistNames', catchAsync(async (req, res, next) => {
+    const beers = await Beer.find({})
+    const displayOntap = await Beer.findOne({ ontap: 'pouring'});
+    const displayIncoming = await Beer.findOne({ ontap: 'kegged'});
+    const displayBottled = await Beer.findOne({ ontap: 'bottled'});
+    const displayPrevious = await Beer.findOne({ ontap: 'previous'});
+    res.render('beers/taplistNames', { beers, displayOntap, displayIncoming, displayBottled, displayPrevious });
+}))
+
+
 app.get('/previousbeers', catchAsync(async (req, res, next) => {
     const beers = await Beer.find({})
     const displayPrevious = await Beer.findOne({ ontap: 'previous'});
