@@ -28,7 +28,7 @@
                 <% beers.sort(function(a, b){return a.tapNo - b.tapNo}) %>
                 <% for (let beer of beers) {%>
                     <% if (beer.ontap === 'pouring') { %>
-                        <h2>- <%= beer.name %> - <%= beer.abv %>% - <%= beer.style %> -</h2>
+                        <h2>- <%= beer.name %> - <%= beer.abv.toFixed(1) %>% - <%= beer.style %> -</h2>
                         <p class="beerdescription"><%= beer.previewDescription %></p>
                    <% } %>
                 <%} %>
